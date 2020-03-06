@@ -30,6 +30,13 @@ function ccrest_init() {
 add_action('init', 'ccrest_init');
 
 
+/* Add 'lost password?' link to login form */
+add_action( 'login_form_middle', 'add_lost_password_link' );
+function add_lost_password_link() {
+	return '<a href="/wp-login.php?action=lostpassword">Lost Password?</a>';
+}
+
+
 function ccrest_enqueue_script() {
   if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
     $app_js = 'http://localhost:3000/static/js/bundle.js';
@@ -54,11 +61,13 @@ function ccrest_load_template( $page_template ) {
         $p = get_post();
         $p->featured_image = get_the_post_thumbnail_url();
         $p->files = get_field('files');
+        $p->categories = array_values(wp_get_post_categories($p->ID, ['fields' => 'slug']));
+        $p->tags = get_the_tags($p->ID);
         $data['assets'][] = $p;
       }
-    } 
+    }
     wp_reset_postdata();
-    // categories
+    // categories data
     $allcats = get_categories([
       'type'                     => 'assets',
       'taxonomy'                 => 'category',
@@ -91,30 +100,3 @@ function ccrest_load_template( $page_template ) {
 }
 add_filter( 'page_template', 'ccrest_load_template' );
 
-
-/*
- * Add 'lost password?' link to login form
- */
-add_action( 'login_form_middle', 'add_lost_password_link' );
-function add_lost_password_link() {
-	return '<a href="/wp-login.php?action=lostpassword">Lost Password?</a>';
-}
-
-
-
-// add_action('wp_enqueue_scripts', function() {
-  // if (!in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
-  //   // PROD
-  //   $JSfiles = scandir(dirname(__DIR__) . '/client/build/static/js/');
-  //   $react_js_to_load = '';
-  //   foreach($JSfiles as $filename) {
-  //     if(strpos($filename,'.js')&&!strpos($filename,'.js.map')) {
-  //       $react_js_to_load = plugin_dir_url( __DIR__ ) . 'client/build/static/js/' . $filename;
-  //     }
-  //   }
-  // } else {
-    // $react_js_to_load = 'http://localhost:3000/static/js/bundle.js';
-  // }
-
-  // wp_enqueue_script('plugin_name_react', $react_js_to_load, '', mt_rand(10,1000), true);
-// });

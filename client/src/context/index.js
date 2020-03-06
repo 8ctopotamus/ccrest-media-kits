@@ -1,9 +1,10 @@
 import { createContext } from 'react'
 
 const AppContext = createContext({
-  cart: [],
-  filters: [],
   search: '',
+  filters: [],
+  cart: [],
+  current: null,
 })
 
 export default AppContext

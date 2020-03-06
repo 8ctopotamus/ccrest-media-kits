@@ -17,7 +17,7 @@ $transition: all 260ms ease-in;
 }
 
 .col-3 {
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .topbar {
@@ -76,6 +76,10 @@ $transition: all 260ms ease-in;
 
 // MEDIA QUERIES
 @media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .sidebar-toggle {
     display: block;
     position: absolute;
@@ -97,6 +101,7 @@ $transition: all 260ms ease-in;
   #content-wrap {
     padding: 0 30px;
     overflow-y: initial;
+    height: auto;
   }
   
   .sidebar {

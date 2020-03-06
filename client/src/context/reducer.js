@@ -35,6 +35,11 @@ export default (state, action) => {
       }
       updateLocalStorage(updatedState)
       return updatedState
+    case 'SET_CURRENT':
+      return {
+        ...state,
+        current: action.payload
+      }
     default:
       return state
   }
