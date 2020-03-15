@@ -1,12 +1,13 @@
 import { createContext } from 'react'
 
 const AppContext = createContext({
+  view: null,
+  current: null,
   search: '',
   filters: [],
   cart: [],
-  current: null,
 })
 
 export default AppContext
 
-export const LS_KEY = 'appContext'
+export const LS_KEY = 'cCrestMediaAppContext'

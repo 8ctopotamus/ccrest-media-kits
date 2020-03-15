@@ -3,6 +3,7 @@ import AppContext from './context'
 import AppProvider from './context/provider'
 import Sidebar from './components/sidebar'
 import TopBar from './components/topbar'
+import Cart from './components/cart'
 import ResultsGrid from './components/results'
 import DetailView from './components/detail-view'
 
@@ -16,12 +17,14 @@ const App = () => {
         <div id="app">
           <Sidebar cats={categories} />
           <div id="content-wrap">
-            <TopBar/>  
+            <TopBar/>
             <AppContext.Consumer>
-              {({state}) => (
-                state.current 
-                  ? <DetailView />
-                  : <ResultsGrid items={assets} />  
+              {({state, dispatch}) => (
+                state.view === 'CART'
+                  ? <Cart items={state.cart} />
+                  : state.current 
+                    ? <DetailView state={state} dispatch={dispatch} />
+                    : <ResultsGrid items={assets} />  
               )}
             </AppContext.Consumer>
           </div>

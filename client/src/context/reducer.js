@@ -14,6 +14,11 @@ export default (state, action) => {
         return JSON.parse(localStorage.getItem(LS_KEY))
       }
       return state
+    case 'SET_VIEW':
+      return {
+        ...state,
+        view: action.payload
+      }
     case 'UPDATE_SEARCH':
       return {
         ...state,

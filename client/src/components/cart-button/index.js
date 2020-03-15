@@ -10,17 +10,20 @@ export default (props) => {
   return (
     <AppContext.Consumer>
       {({state, dispatch}) => {
-        const ButtonComponent = state.cart.includes(props.slug) 
+        const Icon = state.cart.includes(props.slug) 
           ? MdRemoveShoppingCart
           : MdAddShoppingCart
         return (
-          <ButtonComponent
-            {...props}
-            onClick={() => dispatch({
-              type: 'TOGGLE_CART_ITEM',
-              payload: props.slug,
-            })}
-          />
+          <div onClick={() => dispatch({
+            type: 'TOGGLE_CART_ITEM',
+            payload: props.slug,
+          })}>
+            <Icon
+              {...props}
+              className={`cart-button ${props.className}`}
+            />
+            {props.text}
+          </div>
         )
       }}
     </AppContext.Consumer>

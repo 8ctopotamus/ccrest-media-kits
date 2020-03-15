@@ -32,7 +32,18 @@ $transition: all 260ms ease-in;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.cart-count,
+.cart-button {
+  cursor: pointer;
+}
+
+.cart-count {
+  display: flex;
+}
+
 .topbar {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
