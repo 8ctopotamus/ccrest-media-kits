@@ -12,7 +12,7 @@ function car_custom_posttype() {
     'query_var' => false,
     'menu_icon' => 'dashicons-images-alt',
     'taxonomies' => array('post_tag', 'category'),
-    'supports' => array('title', 'thumbnail', 'editor')
+    'supports' => array('title', 'editor'),
   ));
   register_taxonomy_for_object_type('category', 'assets');
   register_taxonomy_for_object_type('post_tag', 'assets');

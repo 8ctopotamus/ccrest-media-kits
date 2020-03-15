@@ -1,18 +1,20 @@
 import React from 'react'
 import AppContext from '../../context'
 import File from './file'
+import CartButton from '../cart-button'
 
 export default () => (
   <AppContext.Consumer>
     {({state, dispatch}) => {
       const {
+        post_name: slug,
         post_title,
         files,
         post_content,
         categories,
         tags,
       } = state.current
-      console.log(state.current)
+
       return (
         <>
           <button 
@@ -20,11 +22,12 @@ export default () => (
               type: 'SET_CURRENT',
               payload: null,
             })}
-          >
-            X
-          </button>
+          >&times;</button>
 
           <h1>{post_title}</h1>
+
+          <CartButton slug={slug} size="25" />
+
           {categories && (
             <>
               <h6>Categories</h6>

@@ -16,6 +16,15 @@ export default ({ items }) => (
               return item.categories
                 .find(cat => state.filters.includes(cat))
             })
+            .filter(
+              item => state.search === ''
+                ? true
+                : ( item.post_title 
+                      .toLowerCase()
+                      .includes(state.search) ||
+                    item.tags
+                      .find(tag => tag.toLowerCase().includes(state.search)) )
+            )
             .map(item => (
               <Result item={item} key={item.post_name} />
             ))

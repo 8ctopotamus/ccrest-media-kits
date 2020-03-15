@@ -5,6 +5,7 @@ const Controls = ({ cats }) => (
   <AppContext.Consumer>
     {({state, dispatch}) => (
       <>
+        <pre>{JSON.stringify(state, null, 2)}</pre>
         <input 
           onChange={e => dispatch({
             type: 'UPDATE_SEARCH',

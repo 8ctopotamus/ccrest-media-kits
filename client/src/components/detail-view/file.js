@@ -1,4 +1,5 @@
 import React from 'react'
+import CartButton from '../cart-button'
 
 export default ({ file }) => {
   const image = file.type === 'image'
@@ -11,6 +12,7 @@ export default ({ file }) => {
       </div>
       <div>
         <h3>{file.title}</h3>
+        <CartButton slug={file.url} size="25" />
         <p>{file.description}</p>
         <ul>
           <li>{file.width} &times; {file.height}px</li>

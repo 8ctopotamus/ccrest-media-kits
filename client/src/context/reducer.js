@@ -36,10 +36,12 @@ export default (state, action) => {
       updateLocalStorage(updatedState)
       return updatedState
     case 'SET_CURRENT':
-      return {
+      updatedState = {
         ...state,
         current: action.payload
       }
+      updateLocalStorage(updatedState)
+      return updatedState
     default:
       return state
   }

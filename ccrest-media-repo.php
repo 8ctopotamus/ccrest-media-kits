@@ -14,3 +14,4 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 include( plugin_dir_path( __FILE__ ) . 'inc/init.php' );
 include( plugin_dir_path( __FILE__ ) . 'inc/cpt.php' );
+include( plugin_dir_path( __FILE__ ) . 'inc/load-template.php' );
