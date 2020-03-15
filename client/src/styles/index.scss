@@ -3,9 +3,19 @@ $secondary: purple;
 $navWidth: 220px;
 $transition: all 260ms ease-in;
 
+body {
+  color: black;
+}
+
 #app {
   position: relative;
   background: #eee;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 30px;
 }
 
 .grid {
@@ -48,9 +58,11 @@ $transition: all 260ms ease-in;
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 25px;
+  padding: 10px 30px;
 }
 
 .sidebar {
+  color: white;
   position: absolute;
   top: 0;
   left: 0;
@@ -68,10 +80,9 @@ $transition: all 260ms ease-in;
   }
 }
   
-#content-wrap {
+#results-wrap {
   padding: 20px 30px 60px calc(#{$navWidth} + 30px);
   height: 100%;
-  color: black;
   overflow-y: auto;
 }
 
@@ -131,7 +142,7 @@ $transition: all 260ms ease-in;
     }
   }
 
-  #content-wrap {
+  #results-wrap {
     padding: 0 30px;
     overflow-y: initial;
     height: auto;

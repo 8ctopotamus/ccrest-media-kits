@@ -37,12 +37,19 @@ function add_lost_password_link() {
 }
 
 
-function ccrest_enqueue_script() {
+function ccrest_enqueue_scripts_styles() {
+  wp_register_style( 'animate_css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' );
+
   if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
     $app_js = 'http://localhost:3000/static/js/bundle.js';
   } else {
-    echo 'IS LIVE';
+    echo 'IS LIVE!';
   }
-  wp_enqueue_script( 'app_js', $app_js, array(), false, true );
+  wp_register_script( 'app_js', $app_js, array(), false, true );
+
+  if (is_page(PLUGIN_SLUG)) {
+    wp_enqueue_style('animate_css');
+    wp_enqueue_script('app_js');
+  }
 }
-add_action('wp_enqueue_scripts', 'ccrest_enqueue_script');
+add_action('wp_enqueue_scripts', 'ccrest_enqueue_scripts_styles');

@@ -19,9 +19,9 @@ export default () => (
           >
             {isCartView
               ? (
-                <>
-                  <MdClose size="25" /> 
+                <>  
                   <span>Keep browsing</span>
+                  <MdClose size="25" /> 
                 </>
               ) : (
                 <>

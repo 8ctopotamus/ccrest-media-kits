@@ -1,11 +1,9 @@
 import React from 'react'
 import AppContext from './context'
 import AppProvider from './context/provider'
-import Sidebar from './components/sidebar'
 import TopBar from './components/topbar'
 import Cart from './components/cart'
-import ResultsGrid from './components/results'
-import DetailView from './components/detail-view'
+import Search from './components/search'
 
 const App = () => {
   if (!window.data) {
@@ -15,19 +13,19 @@ const App = () => {
     return (
       <AppProvider>
         <div id="app">
-          <Sidebar cats={categories} />
-          <div id="content-wrap">
-            <TopBar/>
-            <AppContext.Consumer>
-              {({state, dispatch}) => (
-                state.view === 'CART'
-                  ? <Cart items={state.cart} />
-                  : state.current 
-                    ? <DetailView state={state} dispatch={dispatch} />
-                    : <ResultsGrid items={assets} />  
-              )}
-            </AppContext.Consumer>
-          </div>
+          <TopBar />
+          <AppContext.Consumer>
+            {({state, dispatch}) => (
+              state.view === 'CART'
+                ? <Cart items={state.cart} />
+                : <Search 
+                    state={state} 
+                    dispatch={dispatch}
+                    categories={categories}
+                    assets={assets}
+                  />
+            )}
+          </AppContext.Consumer>
         </div>
       </AppProvider>
     )
