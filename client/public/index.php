@@ -5,7 +5,7 @@
 
 if (!is_user_logged_in()) {
   get_header();
-  echo '<div id="site-content">';
+  echo '<div id="site-content" style="max-width: 50vw; display: block; margin: 0 auto;">';
   echo '<h1>You must be logged in to access the files.</h1>';
   wp_login_form(); 
   echo '</div>';

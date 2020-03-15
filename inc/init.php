@@ -61,7 +61,12 @@ function ccrest_load_template( $page_template ) {
         $p = get_post();
         $p->featured_image = get_the_post_thumbnail_url();
         $p->files = get_field('files');
-        $p->categories = array_values(wp_get_post_categories($p->ID, ['fields' => 'slug']));
+        $catIDs = wp_get_post_categories($p->ID);
+        $p->categories = [];
+        foreach ($catIDs as $cID) {
+          $cat = get_category($cID);
+          $p->categories[] = $cat->slug;
+        }
         $p->tags = get_the_tags($p->ID);
         $data['assets'][] = $p;
       }

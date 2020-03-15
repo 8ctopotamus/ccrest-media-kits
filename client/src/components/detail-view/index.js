@@ -12,6 +12,7 @@ export default () => (
         categories,
         tags,
       } = state.current
+      console.log(state.current)
       return (
         <>
           <button 
@@ -24,10 +25,6 @@ export default () => (
           </button>
 
           <h1>{post_title}</h1>
-          <div dangerouslySetInnerHTML={{__html: post_content}} />
-          
-          {files && files.map(file => <File file={file} />)}
-          
           {categories && (
             <>
               <h6>Categories</h6>
@@ -42,6 +39,9 @@ export default () => (
             </>
           )}
           
+          <div dangerouslySetInnerHTML={{__html: post_content}} />
+          
+          {files && files.map(file => <File file={file} />)}          
         </>
       )
     }}

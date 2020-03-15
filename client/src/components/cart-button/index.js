@@ -1,9 +1,9 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 import {
   MdAddShoppingCart,
   MdRemoveShoppingCart
 } from 'react-icons/md'
+
 import AppContext from '../../context'
 
 export default (props) => {

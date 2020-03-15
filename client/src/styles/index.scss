@@ -16,7 +16,19 @@ $transition: all 260ms ease-in;
   grid-gap: 30px;
 }
 
+.col-1-2 {
+  grid-template-columns: 1fr 2fr;
+}
+
+.col-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
 .col-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.col-4 {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
@@ -64,6 +76,16 @@ $transition: all 260ms ease-in;
   }
   .result-inner {
     padding: 15px;
+  }
+  .result-preview {
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    &:hover {
+      opacity: .85;
+    }
   }
 }
 
