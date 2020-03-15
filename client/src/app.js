@@ -6,10 +6,10 @@ import Cart from './components/cart'
 import Search from './components/search'
 
 const App = () => {
-  if (!window.data) {
+  if (!wp_data) {
     return <p>This is not the app you are looking for. You're probably looking for the dev React app in the WordPress plugin: <a href="http://localhost/plugin-dev/media-repository">http://localhost/plugin-dev/media-repository</a></p>
   } else {
-    const { assets, categories } = window.data
+    const { assets, categories } = wp_data.data
     return (
       <AppProvider>
         <div id="app">

@@ -14,10 +14,16 @@ export default ({state, dispatch}) => {
     tags,
   } = state.current
 
+  const firstFile = files[0]
+  const isImage = firstFile.type === 'image'
+  const featuredImage = isImage
+    ? firstFile.url
+    : firstFile.icon
+
   return (
     <Animated 
       animationIn="fadeIn"
-      className="container"
+      className="container detail-view"
     >
       <span 
         onClick={() => dispatch({
@@ -30,24 +36,32 @@ export default ({state, dispatch}) => {
           cursor: 'pointer',
         }}
       >
-        <MdArrowBack size="25" /> Back
+        <MdArrowBack size="25" /> <span>Back</span>
       </span>
 
-      <h1>{post_title}</h1>
-
-      <CartButton text="Collection" slug={slug} size="25" />
-
-      {categories.length > 0 && (
-        <p>Categories: {categories.map(cat => <span key={cat}>{cat}</span>)}</p>
-      )}
       
-      {tags.length > 0 && (
-        <p>Tags: {tags.map(tag => <span key={tag}>{tag}</span>)}</p>
-      )}
-      
-      <div dangerouslySetInnerHTML={{__html: post_content}} />
-      
-      {files && files.map(file => <File file={file} />)}          
+      <div className="grid gap col-2">    
+      <div>
+        <img src={featuredImage} alt={firstFile.alt} />
+        <h4>Categories</h4>
+        {categories.length > 0 && (
+          <ul>{categories.map(cat => <li key={cat}>{cat}</li>)}</ul>
+        )}
+      </div>
+      <div>
+          <h1>{post_title}</h1>
+          {tags.length > 0 && (
+            <ul className="tag-cloud">
+              <CartButton text="ALL" slug={slug} size="35" />     
+              {tags.map(tag => <li key={tag}>{tag}</li>)}
+            </ul>
+          )}
+          <div dangerouslySetInnerHTML={{__html: post_content}} />
+        </div>
+      </div>
+      <hr/>
+      <h2>Files</h2>
+      {files && files.map(file => <File file={file} key={file.ID} />)}
     </Animated>
   )
 }

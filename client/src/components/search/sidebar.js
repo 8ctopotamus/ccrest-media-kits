@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { MdFilterList, MdClose } from 'react-icons/md'
 import AppContext from '../../context'
 
 const Controls = ({ cats }) => (
@@ -55,9 +56,12 @@ export default ({ cats }) => {
   return (
     <div className={`${open ? 'open' : ''}`}> 
       <div className="sidebar-toggle hidden-lg">
-        <button size="30" onClick={toggleOpen}>
-          { open ? 'X' : 'Filter' }
-        </button>
+        <div onClick={toggleOpen}>
+          { open 
+            ? <MdClose size="30" />
+            : <MdFilterList size="30" />
+          }
+        </div>
       </div>
       <div className="sidebar">
         <Controls cats={cats} />

@@ -14,14 +14,14 @@ export default (props) => {
           ? MdRemoveShoppingCart
           : MdAddShoppingCart
         return (
-          <div onClick={() => dispatch({
-            type: 'TOGGLE_CART_ITEM',
-            payload: props.slug,
-          })}>
-            <Icon
-              {...props}
-              className={`cart-button ${props.className}`}
-            />
+          <div 
+            className="cart-button"
+            onClick={() => dispatch({
+              type: 'TOGGLE_CART_ITEM',
+              payload: props.slug,
+            })}
+          >
+            <Icon {...props} className={props.className} />
             {props.text}
           </div>
         )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdCloudDownload, MdPageview } from 'react-icons/md'
+import { MdPageview } from 'react-icons/md'
 import AppContext from '../../context'
 import CartButton from '../cart-button'
 
@@ -12,6 +12,7 @@ export default ({ item }) => {
   return (
     <AppContext.Consumer>
       {({ state, dispatch }) => {
+        const fileCount = files.length
         const firstFile = files[0]
         const isImage = firstFile.type === 'image'
         const featuredImage = isImage
@@ -22,7 +23,7 @@ export default ({ item }) => {
           type: 'SET_CURRENT',
           payload: item,
         })
-
+        
         return (
           <div className="result">
             <div
@@ -35,11 +36,15 @@ export default ({ item }) => {
             />
             <div className="result-inner">
               <h6>{post_title}</h6>
-              <div className="actions">
-                <MdCloudDownload size="25" />
-                <MdPageview onClick={launchDetailView} size="25" />
-                <CartButton slug={post_name} size="25" />
-              </div>
+            </div>
+            <div className="actions">
+              <span style={{
+                marginRight: 'auto',
+              }}>
+                {fileCount} file{fileCount === 1 ? null : 's'}
+              </span>
+              <MdPageview onClick={launchDetailView} size="25" />
+              <CartButton slug={post_name} size="25" />
             </div>
           </div>
         )
