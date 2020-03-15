@@ -13,7 +13,7 @@ function ccrest_init() {
       <?php
     } );
   }
-  
+
   /* Create /media-repository page if doesn't exist */
   $page = get_page_by_path( PLUGIN_SLUG , OBJECT );
   if ( !isset($page) ) {
@@ -40,16 +40,37 @@ function add_lost_password_link() {
 function ccrest_enqueue_scripts_styles() {
   wp_register_style( 'animate_css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' );
 
+  // localhost
   if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
     $app_js = 'http://localhost:3000/static/js/bundle.js';
-  } else {
-    echo 'IS LIVE!';
+  } 
+  // production
+  else {
+    echo 'IS LIVE!'; // load built react app here
   }
+
   wp_register_script( 'app_js', $app_js, array(), false, true );
 
   if (is_page(PLUGIN_SLUG)) {
     wp_enqueue_style('animate_css');
+    $appData = cc_get_wp_data();
+    wp_localize_script( 'app_js', 'wp_data', [
+      'data' => $appData,
+      'site_url' => site_url(),
+      'PLUGIN_SLUG' => PLUGIN_SLUG,
+      'user' => wp_get_current_user(),
+    ] );
     wp_enqueue_script('app_js');
   }
 }
 add_action('wp_enqueue_scripts', 'ccrest_enqueue_scripts_styles');
+
+
+// load template
+function ccrest_load_template( $page_template ) {
+  if ( is_page( PLUGIN_SLUG ) ) {
+    $page_template = dirname( __DIR__ ) . '/client/public/index.php';
+  }
+  return $page_template;
+}
+add_filter( 'page_template', 'ccrest_load_template' );
