@@ -47,6 +47,12 @@ export default (state, action) => {
       }
       updateLocalStorage(updatedState)
       return updatedState
+    case 'CLEAR_CART':
+      console.log(action.payload)
+      return {
+        ...state,
+        cart: [],
+      }
     default:
       return state
   }

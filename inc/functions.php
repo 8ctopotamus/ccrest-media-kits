@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 function cc_get_wp_data() {
   $data = [];
   // assets
@@ -55,4 +56,10 @@ function cc_get_wp_data() {
   }
   $data['categories'] = $parents;
   return $data;
+  exit;
 }
+
+function CART_SUBMIT () {
+  echo ':D Submitted!!!';
+  exit;
+} 

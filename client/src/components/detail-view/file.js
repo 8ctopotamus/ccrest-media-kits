@@ -20,7 +20,7 @@ export default ({ file }) => {
   const image = type === 'image' ? url : icon
 
   return (
-    <div className="grid gap col-1-2">
+    <div className="grid gap col-1-2 file">
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <img src={image} alt={alt} key={ID} />
       </div>

@@ -1,6 +1,11 @@
 <?php
 
-define('PLUGIN_SLUG', 'media-repository');
+// routes
+add_action( 'admin_post_nopriv_cc_actions', 'cc_actions' );
+add_action( 'admin_post_cc_actions', 'cc_actions' );
+function cc_actions() {
+  include( plugin_dir_path( __DIR__ ) . 'inc/router.php' );
+}
 
 function ccrest_init() {
   /* Make sure that ACF is installed and activated */
@@ -57,8 +62,9 @@ function ccrest_enqueue_scripts_styles() {
     wp_localize_script( 'app_js', 'wp_data', [
       'data' => $appData,
       'site_url' => site_url(),
+      'admin_ajax_url' => esc_url( admin_url('admin-post.php')),
       'PLUGIN_SLUG' => PLUGIN_SLUG,
-      'user' => wp_get_current_user(),
+      'user' => wp_get_current_user()->data,
     ] );
     wp_enqueue_script('app_js');
   }

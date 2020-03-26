@@ -38,27 +38,41 @@ export default ({state, dispatch}) => {
       >
         <MdArrowBack size="25" /> <span>Back</span>
       </span>
-
-      
+      <br/>
       <div className="grid gap col-2">    
-      <div>
-        <img src={featuredImage} alt={firstFile.alt} />
-        <h4>Categories</h4>
-        {categories.length > 0 && (
-          <ul>{categories.map(cat => <li key={cat}>{cat}</li>)}</ul>
-        )}
-      </div>
-      <div>
+        <div>
+          <img src={featuredImage} alt={firstFile.alt} /> 
+        </div>
+        <div>
           <h1>{post_title}</h1>
-          {tags.length > 0 && (
-            <ul className="tag-cloud">
-              <CartButton text="ALL" slug={slug} size="35" />     
-              {tags.map(tag => <li key={tag}>{tag}</li>)}
-            </ul>
-          )}
-          <div dangerouslySetInnerHTML={{__html: post_content}} />
+          <CartButton text={files.length} slug={slug} size="35" />
         </div>
       </div>
+      <br/>
+      <div className="grid gap col-2-1-1">
+        <div dangerouslySetInnerHTML={{__html: post_content}} />
+        <div>
+          <h4>Tags</h4>
+          {tags.length > 0 && (
+            <ul className="tag-cloud">
+              {tags.map(tag => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div>
+          <h4>Categories</h4>
+          {categories.length > 0 && (
+            <ul className="cats">
+            {categories.map(cat => (
+              <li key={cat}>{cat}</li>
+            ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
       <hr/>
       <h2>Files</h2>
       {files && files.map(file => <File file={file} key={file.ID} />)}
