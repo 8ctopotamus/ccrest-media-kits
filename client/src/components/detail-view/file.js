@@ -28,7 +28,7 @@ export default ({ file }) => {
         <h3>{title} <small>({subtype})</small></h3>
         <div style={{ display: 'flex' }}>
           <div style={{ marginRight: 30 }}>
-            <CartButton slug={url} size="25" />
+            {/* <CartButton slug={url} size="25" /> */}
             <a href={url} download title="Download file">
               <MdCloudDownload size="25" color="black" />
             </a>

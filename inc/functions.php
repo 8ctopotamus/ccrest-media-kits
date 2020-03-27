@@ -1,6 +1,10 @@
 <?php
 
 function CART_SUBMIT () {
+  if (empty($_POST['email'])) {
+    die('No email provided');
+  }
+
   echo ':D Submitted!!!';
   die();
 } 

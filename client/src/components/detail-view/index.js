@@ -36,7 +36,7 @@ export default ({state, dispatch}) => {
           cursor: 'pointer',
         }}
       >
-        <MdArrowBack size="25" /> <span>Back</span>
+        <MdArrowBack size="25" /> <span>Search</span>
       </span>
       <br/>
       <div className="grid gap col-2">    
@@ -45,7 +45,12 @@ export default ({state, dispatch}) => {
         </div>
         <div>
           <h1>{post_title}</h1>
-          <CartButton text={files.length} slug={slug} size="35" />
+          <CartButton 
+            text={files.length} 
+            slug={slug} 
+            files={files}
+            size="35"
+          />
         </div>
       </div>
       <br/>

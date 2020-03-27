@@ -34,9 +34,13 @@ export default (state, action) => {
     case 'TOGGLE_CART_ITEM':
       updatedState = {
         ...state,
-        cart: state.cart.includes(action.payload)
-          ? state.cart.filter(saved => saved !== action.payload)
-          : [...state.cart, action.payload]
+        cart: {
+          ...state.cart,
+          [action.payload.slug]: action.payload.files,
+        }
+      }
+      if (state.cart.hasOwnProperty(action.payload.slug)) {
+        delete updatedState.cart[action.payload.slug]
       }
       updateLocalStorage(updatedState)
       return updatedState

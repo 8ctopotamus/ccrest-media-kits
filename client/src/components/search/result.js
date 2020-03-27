@@ -7,7 +7,7 @@ export default ({ item }) => {
   const {
     post_title,
     post_name,
-    files
+    files,
   } = item
   return (
     <AppContext.Consumer>
@@ -44,7 +44,7 @@ export default ({ item }) => {
                 {fileCount} file{fileCount === 1 ? null : 's'}
               </span>
               <MdPageview onClick={launchDetailView} size="25" />
-              <CartButton slug={post_name} size="25" />
+              <CartButton slug={post_name} files={files} size="25" />
             </div>
           </div>
         )

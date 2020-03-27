@@ -28,16 +28,6 @@ const App = () => {
                     assets={assets}
                   />
             )}
-            {/*({state, dispatch}) => (
-              state.view === 'CART'
-                ? <Cart items={state.cart} dispatch={dispatch} />
-                : <Search 
-                    state={state} 
-                    dispatch={dispatch}
-                    categories={categories}
-                    assets={assets}
-                  />
-            )*/}
           </AppContext.Consumer>
         </div>
       </AppProvider>

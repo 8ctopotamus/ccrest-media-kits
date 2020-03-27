@@ -5,7 +5,7 @@ const AppContext = createContext({
   current: null,
   search: '',
   filters: [],
-  cart: [],
+  cart: {},
 })
 
 export default AppContext
