@@ -1,5 +1,10 @@
 <?php
 
+function CART_SUBMIT () {
+  echo ':D Submitted!!!';
+  die();
+} 
+
 function cc_get_wp_data() {
   $data = [];
   // assets
@@ -58,8 +63,3 @@ function cc_get_wp_data() {
   return $data;
   exit;
 }
-
-function CART_SUBMIT () {
-  echo ':D Submitted!!!';
-  exit;
-} 

@@ -51,7 +51,7 @@ function ccrest_enqueue_scripts_styles() {
   } 
   // production
   else {
-    echo 'IS LIVE!'; // load built react app here
+    $app_js = null; // load built react app here
   }
 
   wp_register_script( 'app_js', $app_js, array(), false, true );

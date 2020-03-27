@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import qs from 'qs'
 import { Animated } from 'react-animated-css'
 
 const { admin_ajax_url, user } = wp_data
@@ -15,12 +16,14 @@ export default ({ items, dispatch }) => {
   const handleSubmit = async e => {
     e.preventDefault()
     setLoading(true)
-    const response = await axios.post(admin_ajax_url, {
+    let params = {
       action: 'cc_actions',
       do: 'CART_SUBMIT',
       email,
       items,
-    })
+    }
+    params = qs.stringify(params)
+    const response = await axios.post(admin_ajax_url, params)
     console.log(response)
     setLoading(false)
   }
