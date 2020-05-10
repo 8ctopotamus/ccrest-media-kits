@@ -43,7 +43,9 @@ export default ({ item }) => {
               }}>
                 {fileCount} file{fileCount === 1 ? null : 's'}
               </span>
-              <MdPageview onClick={launchDetailView} size="25" />
+              <div className="hover-icon">
+                <MdPageview onClick={launchDetailView} size="25" />
+              </div>
               <CartButton slug={post_name} files={files} size="25" />
             </div>
           </div>

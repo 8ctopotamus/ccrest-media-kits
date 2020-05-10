@@ -2,7 +2,7 @@ import React from 'react'
 import { MdCloudDownload } from 'react-icons/md'
 import CartButton from '../cart-button'
 
-export default ({ file }) => {
+export default ({ slug, file }) => {
   const {
     alt,
     description,
@@ -28,9 +28,9 @@ export default ({ file }) => {
         <h3>{title} <small>({subtype})</small></h3>
         <div style={{ display: 'flex' }}>
           <div style={{ marginRight: 30 }}>
-            {/* <CartButton slug={url} size="25" /> */}
-            <a href={url} download title="Download file">
-              <MdCloudDownload size="25" color="black" />
+            <CartButton slug={slug} file={url} size="45" type="TOGGLE_CART_ITEM" />
+            <a href={url} className="hover-icon" title="Download file" download>
+              <MdCloudDownload size="45" color="black" />
             </a>
           </div>
           <div>

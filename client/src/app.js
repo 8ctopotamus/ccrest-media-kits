@@ -20,7 +20,7 @@ const App = () => {
           <AppContext.Consumer>
             {({state, dispatch}) => (
               state.view === 'CART'
-                ? <Cart items={state.cart} dispatch={dispatch} />
+                ? <Cart files={state.cart} dispatch={dispatch} />
                 : <Search 
                     state={state} 
                     dispatch={dispatch}

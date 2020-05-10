@@ -7,32 +7,56 @@ import {
 
 import AppContext from '../../context'
 
-const CartButton = (props) => {
-  return (
-    <AppContext.Consumer>
-      {({state, dispatch}) => {
-        const Icon = state.cart.hasOwnProperty(props.slug) 
-          ? MdRemoveShoppingCart
-          : MdAddShoppingCart
-        return (
-          <div 
-            className="cart-button"
-            onClick={() => dispatch({
-              type: 'TOGGLE_CART_ITEM',
-              payload: {
-                slug: props.slug,
-                files: props.files.map(file => file.url),
-              }
-            })}
-          >
-            <Icon size={props.size} color={props.color} className={props.className} />
-            {props.text}
-          </div>
-        )
-      }}
-    </AppContext.Consumer>
-  )
-}
+const CartButton = ({
+  color,
+  className,
+  file,
+  files,
+  size,
+  slug,
+  style,
+  text,
+  type,
+}) => (
+  <AppContext.Consumer>
+    {({state, dispatch}) => {
+      const Icon = state.cart.hasOwnProperty(slug) 
+        ? MdRemoveShoppingCart
+        : MdAddShoppingCart
+
+      const handleClick = () => {
+        if (type === 'TOGGLE_CART_ITEM') {
+          dispatch({
+            type: 'TOGGLE_CART_ITEM',
+            payload: {
+              slug: slug,
+              files: file,
+            }
+          })
+          return
+        }
+        dispatch({
+          type: 'TOGGLE_CART_PACK',
+          payload: {
+            slug: slug,
+            files: files.map(file => file.url),
+          }
+        })
+      }
+
+      return (
+        <div 
+          className="cart-button"
+          onClick={handleClick}
+          style={style}
+        >
+          <Icon size={size} color={color} className={className} />
+          {text}
+        </div>
+      )
+    }}
+  </AppContext.Consumer>
+)
 
 export default CartButton
 

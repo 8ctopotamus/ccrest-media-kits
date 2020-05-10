@@ -31,7 +31,13 @@ export default (state, action) => {
           ? state.filters.filter(saved => saved !== action.payload)
           : [...state.filters, action.payload]
       }
-    case 'TOGGLE_CART_ITEM':
+    case 'TOGGLE_CART_PACK':
+      if (!action.payload.slug) {
+        throw Error('No slug provided')
+      }
+      if (!action.payload.files) {
+        throw Error('No files provided')
+      }
       updatedState = {
         ...state,
         cart: {
@@ -44,6 +50,27 @@ export default (state, action) => {
       }
       updateLocalStorage(updatedState)
       return updatedState
+    case 'TOGGLE_CART_ITEM':
+      console.log(action.payload)
+      if (state.cart.hasOwnProperty(action.payload.slug)) {
+        updatedState = {
+          ...state,
+          cart: {
+            ...state.cart,
+            [action.payload.slug]: state.cart[action.payload.slug].filter(file => file !== action.payload.file)
+          }
+        }
+      } else {
+        updatedState = {
+          ...state,
+          cart: {
+            ...state.cart,
+            [action.payload.slug]: [action.payload.file]
+          }
+        }
+      }
+      updateLocalStorage(updatedState)
+      return updatedState
     case 'SET_CURRENT':
       updatedState = {
         ...state,
@@ -52,11 +79,12 @@ export default (state, action) => {
       updateLocalStorage(updatedState)
       return updatedState
     case 'CLEAR_CART':
-      console.log(action.payload)
-      return {
+      updatedState = {
         ...state,
-        cart: [],
+        cart: {},
       }
+      updateLocalStorage(updatedState)
+      return updatedState
     default:
       return state
   }

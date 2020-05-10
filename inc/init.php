@@ -51,6 +51,11 @@ function ccrest_enqueue_scripts_styles() {
   } 
   // production
   else {
+
+    $string = file_get_contents(plugin_dir_path( __DIR__ ) . "client/build/static/asset-manifest.json");
+    $json_a = json_decode($string, true);
+    var_dump(a);
+
     $app_js = null; // load built react app here
   }
 

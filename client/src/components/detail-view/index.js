@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdArrowBack } from 'react-icons/md'
+import { MdArrowBack, MdSearch } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import File from './file'
 import CartButton from '../cart-button'
@@ -25,19 +25,29 @@ export default ({state, dispatch}) => {
       animationIn="fadeIn"
       className="container detail-view"
     >
-      <span 
-        onClick={() => dispatch({
-          type: 'SET_CURRENT',
-          payload: null,
-        })}
-        style={{
-          display: 'flex',
-          textDecoration: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        <MdArrowBack size="25" /> <span>Search</span>
-      </span>
+      <div className="detail-header">
+        <span 
+          onClick={() => dispatch({
+            type: 'SET_CURRENT',
+            payload: null,
+          })}
+          style={{
+            display: 'flex',
+            textDecoration: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <MdArrowBack size="25" /> <MdSearch /> <span>Search</span>
+        </span>
+        <CartButton 
+          text={files.length} 
+          slug={slug}
+          files={files}
+          size="50"
+          style={{ paddingLeft: 20, paddingRight: 20}}
+        />
+      </div>
+
       <br/>
       <div className="grid gap col-2">    
         <div>
@@ -45,27 +55,11 @@ export default ({state, dispatch}) => {
         </div>
         <div>
           <h1>{post_title}</h1>
-          <CartButton 
-            text={files.length} 
-            slug={slug} 
-            files={files}
-            size="35"
-          />
         </div>
       </div>
       <br/>
       <div className="grid gap col-2-1-1">
         <div dangerouslySetInnerHTML={{__html: post_content}} />
-        <div>
-          <h4>Tags</h4>
-          {tags.length > 0 && (
-            <ul className="tag-cloud">
-              {tags.map(tag => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-          )}
-        </div>
         <div>
           <h4>Categories</h4>
           {categories.length > 0 && (
@@ -76,11 +70,23 @@ export default ({state, dispatch}) => {
             </ul>
           )}
         </div>
+        <div>
+          <h4>Tags</h4>
+          {tags.length > 0 && (
+            <ul className="tag-cloud">
+              {tags.map(tag => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
 
       <hr/>
       <h2>Files</h2>
-      {files && files.map(file => <File file={file} key={file.ID} />)}
+      {files && files.map(file => (
+        <File file={file} slug={slug} key={file.ID} />
+      ))}
     </Animated>
   )
 }

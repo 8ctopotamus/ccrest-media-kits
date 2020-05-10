@@ -27,7 +27,7 @@ export default () => (
                 ) : (
                   <>
                     <MdShoppingCart size="25" /> 
-                    <span>{state.cart.length}</span>
+                    <span>{Object.keys(state.cart).length}</span>
                   </>
                 )}
             </div>

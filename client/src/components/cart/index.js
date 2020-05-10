@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import qs from 'qs'
+import { MdClose } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
+
+const wp_data = window.wp_data 
+    ? window.wp_data
+    : null
 
 const { admin_ajax_url, user } = wp_data
 
@@ -9,7 +14,7 @@ const defaultEmail = user
   ? user.user_email
   : ''
 
-export default ({ items, dispatch }) => {
+export default ({ files, dispatch }) => {
   const [email, setEmail] = useState(defaultEmail)
   const [loading, setLoading] = useState(false)
 
@@ -20,11 +25,11 @@ export default ({ items, dispatch }) => {
       action: 'cc_actions',
       do: 'CART_SUBMIT',
       email,
-      items,
+      files,
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
-    console.log(response)
+    console.log(response.data)
     setLoading(false)
   }
 
@@ -60,7 +65,29 @@ export default ({ items, dispatch }) => {
       ) : (
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
-      <pre>{JSON.stringify(items, null, 2)}</pre>
+      
+      { Object.entries(files) > 0 ? Object.entries(files).map(pack => {
+        const [key, val] = pack
+        return (
+          <div key={key}>
+            <h3>{key}</h3>
+            {val.map(file => (
+              <li style={{display:'flex', justifyContent: 'space-between'}} key={file}>
+                <span>{file}</span>
+                <MdClose onClick={() => dispatch({
+                  type: 'TOGGLE_CART_ITEM',
+                  payload: {
+                    slug: key,
+                    file: file
+                  },
+                })} />
+              </li>
+            ))}
+          </div>
+        )
+      }) : (
+        <p style={{marginTop: 50}}>Looks like you need to add some files to your cart.</p>
+      )}
     </Animated>
   )
 }
