@@ -1,5 +1,19 @@
 <?php
 
+$upload_dir = wp_upload_dir();
+$upload_dir = $upload_dir['basedir'];
+$upload_dir = $upload_dir . '/ccrest-media-kits';
+
+define('CCREST_MEDIA_KITS_ZIP_STORAGE', $upload_dir);
+
+/*
+** create ZIP storage directory in wp-content/uploads
+*/
+if (! is_dir(CCREST_MEDIA_KITS_ZIP_STORAGE)) {
+  mkdir( CCREST_MEDIA_KITS_ZIP_STORAGE, 0700 );
+}
+
+
 // routes
 add_action( 'admin_post_nopriv_cc_actions', 'cc_actions' );
 add_action( 'admin_post_cc_actions', 'cc_actions' );

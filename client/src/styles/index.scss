@@ -1,11 +1,7 @@
 $primary: #1e73be;
-$secondary: purple;
+$secondary: #cd2653;
 $navWidth: 220px;
 $transition: all 260ms ease-in;
-
-body {
-  color: black;
-}
 
 .sr-only {
   display: none;
@@ -28,10 +24,6 @@ body {
 
 .gap {
   grid-gap: 30px;
-}
-
-.grid-reverse {
-  // direction: rtl;
 }
 
 .col-1-2 {
@@ -74,7 +66,6 @@ body {
   }
 }
 
-
 .cart-button {
   &:hover {
     background: lighten($primary, 20%);
@@ -103,7 +94,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background: $primary;
+  background: $secondary;
   width: $navWidth;
   height: 100%;
   z-index: 100;

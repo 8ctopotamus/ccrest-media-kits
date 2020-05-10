@@ -8,13 +8,15 @@
     "@testing-library/user-event": "^7.1.2",
     "acorn": "^7.1.1",
     "axios": "^0.19.2",
+    "icons": "^1.0.0",
     "node-sass": "^4.14.1",
     "qs": "^6.9.3",
-    "react": "^16.13.0",
+    "react": "^16.13.1",
     "react-animated-css": "^1.2.1",
     "react-dom": "^16.13.0",
-    "react-icons": "^3.9.0",
-    "react-scripts": "3.4.0"
+    "react-icons": "^3.10.0",
+    "react-scripts": "3.4.0",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "node ./scripts/start-non-split.js",

@@ -36,7 +36,7 @@ export default ({ items }) => (
                     animationInDelay={260 + (i * 100)}
                     key={item.post_name}
                   >
-                    <Result item={item} />
+                    {item? <Result item={item} /> : <div></div>}
                   </Animated>
                 ))
           ) : (

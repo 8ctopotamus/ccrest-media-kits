@@ -1,5 +1,6 @@
 import React from 'react'
-import { MdClose, MdShoppingCart } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
+import { AiOutlineFileZip } from "react-icons/ai"
 import AppContext from '../../context'
 
 export default () => (
@@ -28,8 +29,8 @@ export default () => (
                   </>
                 ) : (
                   <>
-                    <MdShoppingCart size="25" /> 
-                    <span>{cartAmt}</span>
+                    <AiOutlineFileZip size="25" />{' '}
+                    <span>{cartAmt} ZIP'ed</span>
                   </>
                 )}
             </div>

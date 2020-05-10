@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
 import qs from 'qs'
 import { MdClose } from 'react-icons/md'
 import { Animated } from 'react-animated-css'

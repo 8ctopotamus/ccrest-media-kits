@@ -1,8 +1,8 @@
 import React from 'react'
 import AppContext from './context'
 import AppProvider from './context/provider'
-import TopBar from './components/topbar'
-import Cart from './components/cart'
+import ZIPCount from './components/zip/count'
+import ZIP from './components/zip'
 import Search from './components/search'
 
 const App = () => {
@@ -16,11 +16,11 @@ const App = () => {
     return (
       <AppProvider>
         <div id="app">
-          <TopBar />
+          <ZIPCount />
           <AppContext.Consumer>
             {({state, dispatch}) => (
               state.view === 'CART'
-                ? <Cart cart={state.cart} dispatch={dispatch} />
+                ? <ZIP cart={state.cart} dispatch={dispatch} />
                 : <Search 
                     state={state} 
                     dispatch={dispatch}
