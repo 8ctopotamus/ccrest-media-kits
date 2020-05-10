@@ -13,7 +13,7 @@ function ccrest_init() {
     add_action( 'admin_notices', function() {
       ?>
         <div class="update-nag notice">
-          <p><?php _e( '<strong>Assets Repository:</strong> Please install the <a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields PRO</a>. It is required for this plugin to work properly.', 'ccrest-media-repo'); ?></p>
+          <p><?php _e( '<strong>[cCrest Media Kits]:</strong> Please install the <a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields PRO</a>. It is required for this plugin to work properly.', 'ccrest-media-kits'); ?></p>
         </div>
       <?php
     } );

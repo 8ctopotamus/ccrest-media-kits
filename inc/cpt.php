@@ -2,13 +2,13 @@
 
 function car_custom_posttype() {
   register_post_type('assets', array(
-    'label' => __('Assets'),
-    'singular_label' => __('Asset'),
+    'label' => __('Media Kits'),
+    'singular_label' => __('Kit'),
     'public' => true,
     'show_ui' => true,
     'capability_type' => 'post',
     'hierarchical' => false,
-    'rewrite' => array('slug' => 'assets'),
+    'rewrite' => array('slug' => 'media-kits'),
     'query_var' => false,
     'menu_icon' => 'dashicons-images-alt',
     'taxonomies' => array('post_tag', 'category'),

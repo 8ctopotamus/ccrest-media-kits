@@ -12,7 +12,7 @@
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-define('PLUGIN_SLUG', 'media-repository');
+define('PLUGIN_SLUG', 'media-kits');
 
 include( plugin_dir_path( __FILE__ ) . 'inc/functions.php' );
 include( plugin_dir_path( __FILE__ ) . 'inc/cpt.php' );
