@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  MdAddShoppingCart,
-  MdRemoveShoppingCart
-} from 'react-icons/md'
+  AiFillFileZip,
+  AiOutlineFileZip
+} from 'react-icons/ai'
 
 import AppContext from '../../context'
 
@@ -20,19 +20,24 @@ const CartButton = ({
 }) => (
   <AppContext.Consumer>
     {({state, dispatch}) => {
-      let Icon = state.cart.hasOwnProperty(slug)
-        ? MdRemoveShoppingCart
-        : MdAddShoppingCart
-      if (type === 'TOGGLE_CART_ITEM') {
-        Icon = state.cart.hasOwnProperty(slug) && state.cart[slug].includes(file)
-          ? MdRemoveShoppingCart
-          : MdAddShoppingCart
+      let Icon = null
+      let isFolderZipped = state.zips.hasOwnProperty(slug)
+      let isFileZipped = null
+      if (type === 'TOGGLE_ZIP_ITEM') {
+        isFileZipped = isFolderZipped && state.zips[slug].includes(file)
+        Icon = isFileZipped
+          ? AiFillFileZip
+          : AiOutlineFileZip
+      } else {
+        Icon = state.zips.hasOwnProperty(slug)
+        ? AiFillFileZip
+        : AiOutlineFileZip
       }
 
       const handleClick = () => {
-        if (type === 'TOGGLE_CART_ITEM') {
+        if (type === 'TOGGLE_ZIP_ITEM') {
           dispatch({
-            type: 'TOGGLE_CART_ITEM',
+            type: 'TOGGLE_ZIP_ITEM',
             payload: {
               slug: slug,
               files: file,
@@ -41,7 +46,7 @@ const CartButton = ({
           return
         }
         dispatch({
-          type: 'TOGGLE_CART_PACK',
+          type: 'TOGGLE_ZIP_FOLDER',
           payload: {
             slug: slug,
             files: files.map(file => file.url),
@@ -51,11 +56,12 @@ const CartButton = ({
 
       return (
         <div 
-          className="cart-button"
+          className="zips-button"
           onClick={handleClick}
           style={style}
         >
           <Icon size={size} color={color} className={className} />
+          {' '}
           {text}
         </div>
       )

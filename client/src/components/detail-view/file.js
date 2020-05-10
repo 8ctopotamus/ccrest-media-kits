@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdCloudDownload } from 'react-icons/md'
-import CartButton from '../cart-button'
+import CartButton from '../zip/toggle-button'
 
 export default ({ slug, file }) => {
   const {
@@ -32,7 +32,7 @@ export default ({ slug, file }) => {
               slug={slug}
               file={url}
               size="45"
-              type="TOGGLE_CART_ITEM"
+              type="TOGGLE_ZIP_ITEM"
             />
             <a
               href={url}

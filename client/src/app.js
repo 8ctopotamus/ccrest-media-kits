@@ -17,10 +17,11 @@ const App = () => {
       <AppProvider>
         <div id="app">
           <ZIPCount />
+          
           <AppContext.Consumer>
             {({state, dispatch}) => (
-              state.view === 'CART'
-                ? <ZIP cart={state.cart} dispatch={dispatch} />
+              state.view === 'ZIP'
+                ? <ZIP zips={state.zips} dispatch={dispatch} />
                 : <Search 
                     state={state} 
                     dispatch={dispatch}

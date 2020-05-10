@@ -15,7 +15,17 @@ const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Obj
   ? user.user_email
   : ''
 
-export default ({ cart, dispatch }) => {
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+`
+
+const Thumb = styled.div`
+  
+`
+
+export default ({ zips, dispatch }) => {
   const [email, setEmail] = useState(defaultEmail)
   const [loading, setLoading] = useState(false)
 
@@ -24,9 +34,9 @@ export default ({ cart, dispatch }) => {
     setLoading(true)
     let params = {
       action: 'cc_actions',
-      do: 'CART_SUBMIT',
+      do: 'ZIP_SUBMIT',
       email,
-      cart,
+      zips,
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
@@ -34,14 +44,13 @@ export default ({ cart, dispatch }) => {
     setLoading(false)
   }
 
-  console.log(cart)
-
   return (
     <Animated 
       animationIn="fadeIn"
-      className="container cart-view"
+      className="container zips-view"
     >
-      <h2>My Cart</h2>
+      <h2>My Downloads</h2>
+      <p>Enter your email so we can send you a download link!</p>
       {wp_data && admin_ajax_url ? (
         <form onSubmit={handleSubmit} className="grid col-2-1-1">
           <div>
@@ -61,36 +70,39 @@ export default ({ cart, dispatch }) => {
             {loading ? 'SENDING...' : 'SEND'}
           </button>
           <button
-            onClick={() => dispatch({type: 'CLEAR_CART'})}
+            onClick={() => dispatch({type: 'CLEAR_ZIP'})}
             type="button"
-          >CLEAR CART</button>
+            style={{background: 'red', color: 'white'}}
+          >CLEAR ALL</button>
         </form>  
       ) : (
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
       
-      { Object.entries(cart).length > 0 ? Object.entries(cart).map(folder => {
+      { Object.entries(zips).length > 0 ? Object.entries(zips).map(folder => {
         const [key, val] = folder
         console.log(folder)
         return (
           <div key={key}>
             <h3>{key}</h3>
-            {val.map(file => (
-              <li style={{display:'flex', justifyContent: 'space-between'}} key={file}>
-                <span>{file}</span>
-                <MdClose onClick={() => dispatch({
-                  type: 'TOGGLE_CART_ITEM',
-                  payload: {
-                    slug: key,
-                    files: file
-                  },
-                })} />
-              </li>
-            ))}
+            <Grid>
+              {val.map(file => (
+                <li style={{display:'flex', justifyContent: 'space-between'}} key={file}>
+                  <span>{file}</span>
+                  <MdClose onClick={() => dispatch({
+                    type: 'TOGGLE_ZIP_ITEM',
+                    payload: {
+                      slug: key,
+                      files: file
+                    },
+                  })} />
+                </li>
+              ))}
+            </Grid>
           </div>
         )
       }) : (
-        <p style={{marginTop: 50}}>Looks like you need to add some kits to your cart.</p>
+        <p style={{marginTop: 50}}>Looks like you need to add some files to your download.</p>
       )}
     </Animated>
   )

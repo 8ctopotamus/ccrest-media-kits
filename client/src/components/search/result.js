@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdPageview } from 'react-icons/md'
 import AppContext from '../../context'
-import CartButton from '../cart-button'
+import CartButton from '../zip/toggle-button'
 
 export default ({ item }) => {
   const {

@@ -2,7 +2,7 @@ import React from 'react'
 import { MdArrowBack, MdSearch } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import File from './file'
-import CartButton from '../cart-button'
+import CartButton from '../zip/toggle-button'
 
 export default ({state, dispatch}) => {
   const {

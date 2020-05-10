@@ -1,7 +1,7 @@
 import { LS_KEY } from './index'
 
 const updateLocalStorage = state => {
-  if (window && window.localStorage) {
+  if (window && window.localStorage && localStorage.getItem(LS_KEY) !== 'undefined') {
     localStorage.setItem(LS_KEY, JSON.stringify(state))
   }
 }
@@ -35,7 +35,7 @@ export default (state, action) => {
           ? state.filters.filter(saved => saved !== action.payload)
           : [...state.filters, action.payload]
       }
-    case 'TOGGLE_CART_PACK':
+    case 'TOGGLE_ZIP_FOLDER':
       if (!action.payload.slug) {
         throw Error('No slug provided')
       }
@@ -44,37 +44,37 @@ export default (state, action) => {
       }
       updatedState = {
         ...state,
-        cart: {
-          ...state.cart,
+        zips: {
+          ...state.zips,
           [action.payload.slug]: action.payload.files,
         }
       }
-      if (state.cart.hasOwnProperty(action.payload.slug)) {
-        delete updatedState.cart[action.payload.slug]
+      if (state.zips.hasOwnProperty(action.payload.slug)) {
+        delete updatedState.zips[action.payload.slug]
       }
       updateLocalStorage(updatedState)
       return updatedState
-    case 'TOGGLE_CART_ITEM':
+    case 'TOGGLE_ZIP_ITEM':
       slug = action.payload.slug
       file = action.payload.files
-      if (state.cart.hasOwnProperty(slug)) {
-        const hasFile = state.cart[slug].includes(file)    
+      if (state.zips.hasOwnProperty(slug)) {
+        const hasFile = state.zips[slug].includes(file)    
         updatedState = {
           ...state,
-          cart: {
-            ...state.cart,
+          zips: {
+            ...state.zips,
             [slug]: hasFile 
-              ? state.cart[slug].filter(f => f !== file)
-              : [...state.cart[slug], file]
+              ? state.zips[slug].filter(f => f !== file)
+              : [...state.zips[slug], file]
           }
         }
-        if (updatedState.cart[slug].length === 0)
-          delete updatedState.cart[slug]
+        if (updatedState.zips[slug].length === 0)
+          delete updatedState.zips[slug]
       } else {
         updatedState = {
           ...state,
-          cart: {
-            ...state.cart,
+          zips: {
+            ...state.zips,
             [slug]: [file]
           }
         }
@@ -88,10 +88,10 @@ export default (state, action) => {
       }
       updateLocalStorage(updatedState)
       return updatedState
-    case 'CLEAR_CART':
+    case 'CLEAR_ZIP':
       updatedState = {
         ...state,
-        cart: {},
+        zips: {},
       }
       updateLocalStorage(updatedState)
       return updatedState

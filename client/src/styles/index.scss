@@ -50,13 +50,13 @@ $transition: all 260ms ease-in;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.cart-count,
-.cart-button {
+.zips-count,
+.zips-button {
   cursor: pointer;
 }
 
 .hover-icon,
-.cart-button {
+.zips-button {
   display: flex;
   border-radius: 50px;
   padding: 10px;
@@ -66,7 +66,7 @@ $transition: all 260ms ease-in;
   }
 }
 
-.cart-button {
+.zips-button {
   &:hover {
     background: lighten($primary, 20%);
   }
@@ -85,7 +85,7 @@ $transition: all 260ms ease-in;
   }
 }
 
-.cart-count {
+.zips-count {
   display: flex;
 }
 
@@ -166,7 +166,7 @@ $transition: all 260ms ease-in;
   }
 }
 
-.cart-view,
+.zips-view,
 .detail-view {
   padding-bottom: 60px;
   h1, h2, h3, h4 {
@@ -174,7 +174,7 @@ $transition: all 260ms ease-in;
   }
 }
 
-.cart-view {
+.zips-view {
   input { height: 100% }
   button[type="submit"] {
     background: $primary;
