@@ -28,8 +28,18 @@ export default ({ slug, file }) => {
         <h3>{title} <small>({subtype})</small></h3>
         <div style={{ display: 'flex' }}>
           <div style={{ marginRight: 30 }}>
-            <CartButton slug={slug} file={url} size="45" type="TOGGLE_CART_ITEM" />
-            <a href={url} className="hover-icon" title="Download file" download>
+            <CartButton
+              slug={slug}
+              file={url}
+              size="45"
+              type="TOGGLE_CART_ITEM"
+            />
+            <a
+              href={url}
+              className="hover-icon"
+              title="Download file"
+              download
+            >
               <MdCloudDownload size="45" color="black" />
             </a>
           </div>

@@ -8,6 +8,8 @@ const updateLocalStorage = state => {
 
 export default (state, action) => {
   let updatedState
+  let slug
+  let file
   switch(action.type) {
     case 'GET_LOCALSTORAGE':
       if (window && window.localStorage && localStorage.getItem(LS_KEY)) {
@@ -52,20 +54,17 @@ export default (state, action) => {
       return updatedState
     case 'TOGGLE_CART_ITEM':
       console.log(action.payload)
-      if (state.cart.hasOwnProperty(action.payload.slug)) {
+      slug = action.payload.slug
+      file = action.payload.files
+      if (state.cart.hasOwnProperty(slug)) {
+        const hasFile = state.cart[slug].includes(file)    
         updatedState = {
           ...state,
           cart: {
             ...state.cart,
-            [action.payload.slug]: state.cart[action.payload.slug].filter(file => file !== action.payload.file)
-          }
-        }
-      } else {
-        updatedState = {
-          ...state,
-          cart: {
-            ...state.cart,
-            [action.payload.slug]: [action.payload.file]
+            [slug]: hasFile 
+              ? state.cart[slug].filter(f => f !== file)
+              : [...state.cart[slug], file]
           }
         }
       }

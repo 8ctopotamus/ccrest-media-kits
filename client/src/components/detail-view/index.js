@@ -83,6 +83,9 @@ export default ({state, dispatch}) => {
       </div>
 
       <hr/>
+
+      <pre>{JSON.stringify(state.cart, null, 2)}</pre>
+
       <h2>Files</h2>
       {files && files.map(file => (
         <File file={file} slug={slug} key={file.ID} />
