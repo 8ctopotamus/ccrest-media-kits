@@ -34,7 +34,7 @@ export default () => (
                     ) : (
                       <AiOutlineFileZip size="25" style={{marginRight: 6}} />
                     ) }
-                    <strong>{zipsAmt} file{zipsAmt===1?'':'s'} ZIP'ed</strong>
+                    <strong>{zipsAmt} file{zipsAmt===1?'':'s'} ZIP'd for download</strong>
                   </>
                 )}
             </div>

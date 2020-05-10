@@ -8,6 +8,7 @@ import {
 import AppContext from '../../context'
 
 const CartButton = ({
+  alternativeText,
   color,
   className,
   file,
@@ -23,13 +24,16 @@ const CartButton = ({
       let Icon = null
       let isFolderZipped = state.zips.hasOwnProperty(slug)
       let isFileZipped = null
+      let isIncluded = false
       if (type === 'TOGGLE_ZIP_ITEM') {
         isFileZipped = isFolderZipped && state.zips[slug].includes(file)
+        isIncluded = isFileZipped
         Icon = isFileZipped
           ? AiFillFileZip
           : AiOutlineFileZip
       } else {
-        Icon = state.zips.hasOwnProperty(slug)
+        isIncluded = isFolderZipped
+        Icon = isFolderZipped
         ? AiFillFileZip
         : AiOutlineFileZip
       }
@@ -62,7 +66,7 @@ const CartButton = ({
         >
           <Icon size={size} color={color} className={className} />
           {' '}
-          {text}
+          {alternativeText && isIncluded ? alternativeText : text}
         </div>
       )
     }}

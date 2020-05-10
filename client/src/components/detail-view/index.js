@@ -1,8 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
 import { MdArrowBack, MdSearch } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import File from './file'
 import CartButton from '../zip/toggle-button'
+
+const ThumbGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+`
 
 export default ({state, dispatch}) => {
   const {
@@ -15,10 +22,6 @@ export default ({state, dispatch}) => {
   } = state.current
 
   const firstFile = files[0]
-  const isImage = firstFile.type === 'image'
-  const featuredImage = isImage
-    ? firstFile.url
-    : firstFile.icon
 
   return (
     <Animated 
@@ -40,7 +43,8 @@ export default ({state, dispatch}) => {
           <MdArrowBack size="25" /> <MdSearch /> <span>Search</span>
         </span>
         <CartButton 
-          text={files.length} 
+          text="Add all"
+          alternativeText="Remove all"
           slug={slug}
           files={files}
           size="50"
@@ -49,17 +53,22 @@ export default ({state, dispatch}) => {
       </div>
 
       <br/>
-      <div className="grid gap col-2">    
+      
+      <h1>{post_title}</h1>
+      <div className="grid gap col-3-1">
         <div>
-          <img src={featuredImage} alt={firstFile.alt} /> 
+          <div dangerouslySetInnerHTML={{__html: post_content}} />
+          <h2>What's included?</h2>
+          <ThumbGrid>
+            {files && files.map(file => (
+              <File
+                file={file}
+                slug={slug}
+                key={file.ID}
+              />
+            ))}
+          </ThumbGrid>
         </div>
-        <div>
-          <h1>{post_title}</h1>
-        </div>
-      </div>
-      <br/>
-      <div className="grid gap col-2-1-1">
-        <div dangerouslySetInnerHTML={{__html: post_content}} />
         <div>
           <h4>Categories</h4>
           {categories.length > 0 && (
@@ -69,8 +78,6 @@ export default ({state, dispatch}) => {
             ))}
             </ul>
           )}
-        </div>
-        <div>
           <h4>Tags</h4>
           {tags.length > 0 && (
             <ul className="tag-cloud">
@@ -81,13 +88,6 @@ export default ({state, dispatch}) => {
           )}
         </div>
       </div>
-
-      <hr/>
-
-      <h2>Files</h2>
-      {files && files.map(file => (
-        <File file={file} slug={slug} key={file.ID} />
-      ))}
     </Animated>
   )
 }

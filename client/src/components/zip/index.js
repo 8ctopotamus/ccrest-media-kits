@@ -16,13 +16,30 @@ const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Obj
   : ''
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 const Thumb = styled.div`
-  
+  background-image: url(${props => props.backgroundImage ? props.backgroundImage : null});
+  background-color: grey;
+  position: relative;
+  background-size: cover;
+  width: 150px;
+  height: 150px;
+  margin: 15px;
+`
+
+const RemoveButton = styled.button`
+  background: 'blue';
+  border-radius: 100%;
+  padding: 10px;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  &:hover {
+    background: red;
+  }
 `
 
 export default ({ zips, dispatch }) => {
@@ -81,25 +98,28 @@ export default ({ zips, dispatch }) => {
       
       { Object.entries(zips).length > 0 ? Object.entries(zips).map(folder => {
         const [key, val] = folder
-        console.log(folder)
         return (
-          <div key={key}>
-            <h3>{key}</h3>
-            <Grid>
+          <>
+            <h3 style={{marginTop: 60}}>{key}</h3>
+            <Grid key={key}>
               {val.map(file => (
-                <li style={{display:'flex', justifyContent: 'space-between'}} key={file}>
-                  <span>{file}</span>
-                  <MdClose onClick={() => dispatch({
-                    type: 'TOGGLE_ZIP_ITEM',
-                    payload: {
-                      slug: key,
-                      files: file
-                    },
-                  })} />
-                </li>
+                <Thumb key={file} backgroundImage={file}>
+                  <RemoveButton
+                    className="remove-button"
+                    onClick={() => dispatch({
+                      type: 'TOGGLE_ZIP_ITEM',
+                      payload: {
+                        slug: key,
+                        files: file
+                      },
+                    })}
+                  >
+                    <MdClose />
+                  </RemoveButton>
+                </Thumb>
               ))}
             </Grid>
-          </div>
+          </>
         )
       }) : (
         <p style={{marginTop: 50}}>Looks like you need to add some files to your download.</p>
