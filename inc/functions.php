@@ -1,22 +1,17 @@
 <?php
 
-function CART_SUBMIT () {
-  
+function GENERATE_ZIP () {
   $to = $_POST['email'];
   $files = $_POST['files'];
 
   if (empty($to)) {
     die('No email provided');
   }
-  
 
   // $wp_admin_dir = getcwd(); // wp-admin
   // chdir(PLUGIN_ZIPS_DIR);
-  
 
   var_dump($files);
-
-
 
 
   // $zip = new ZipArchive;
@@ -28,9 +23,6 @@ function CART_SUBMIT () {
   // } else {
   //   echo 'ZIP creation failed';
   // }
-
-
-
 
   
   // # create new zip object

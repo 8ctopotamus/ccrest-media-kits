@@ -52,19 +52,36 @@ function ccrest_enqueue_scripts_styles() {
   wp_register_style( 'animate_css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' );
 
   // localhost
-  if ($isLocalhost) {
-    $react_app_js = 'http://localhost:3000/static/js/bundle.js';
-  } else {
-    $string = file_get_contents(plugin_dir_path( __DIR__ ) . "client/build/static/asset-manifest.json");
-    $json_a = json_decode($string, true);
-    var_dump(a);
-    $react_app_js = null; // load built react app here
+  if ( $isLocalhost ) {
+  //   $react_app_js = 'http://localhost:3000/static/js/bundle.js';
+  } 
+  // production
+  else {
+    $cssBundle = glob(plugin_dir_path( __DIR__ ) . "client/build/static/css/*.css");
+    $jsBundle = glob(plugin_dir_path( __DIR__ ) . "client/build/static/js/*.js");
+    if (!empty($jsBundle)) {        
+      $cssPartsPath = explode(PLUGIN_SLUG, $cssBundle[0]);
+      $react_app_css = site_url() . '/wp-content/plugins/' . PLUGIN_SLUG . $cssPartsPath[1];
+      wp_register_style( 'react_app_css', $react_app_css );
+      $jsPathParts = explode(PLUGIN_SLUG, $jsBundle[0]);
+      $react_app_js = site_url() . '/wp-content/plugins/' . PLUGIN_SLUG . $jsPathParts[1];
+    }
+  }
+
+  if ( !file_exists($react_app_js) ) {
+    $noteification = $isLocalhost 
+    ? 'Are you running the React app server?'
+    : 'Did you compile the React app?';
+    echo '[' . PLUGIN_SLUG . '] ' . $noteification;
   }
 
   wp_register_script( 'react_app_js', $react_app_js, array(), false, true );
 
-  if ( $shortcode_found ) {
+  if ( $shortcode_found && $react_app_js ) {
     wp_enqueue_style('animate_css');
+    if ( $isLocalhost ) {
+      wp_enqueue_style('react_app_css');
+    }
     $appData = cc_get_wp_data();
     wp_localize_script( 'react_app_js', 'wp_data', [
       'data' => $appData,

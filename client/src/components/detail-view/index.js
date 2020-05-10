@@ -21,8 +21,6 @@ export default ({state, dispatch}) => {
     tags,
   } = state.current
 
-  const firstFile = files[0]
-
   return (
     <Animated 
       animationIn="fadeIn"

@@ -11,9 +11,10 @@ const wp_data = window.wp_data
 
 const { admin_ajax_url, user } = wp_data
 
-const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Object)
-  ? user.user_email
-  : ''
+const defaultEmail = ''
+//  (Object.keys(user).length !== 0 && user.constructor === Object)
+//   ? user.user_email
+//   : ''
 
 const Grid = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ const RemoveButton = styled.button`
 
 export default ({ zips, dispatch }) => {
   const [email, setEmail] = useState(defaultEmail)
+  const [message, setMessage] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async e => {
@@ -51,13 +53,13 @@ export default ({ zips, dispatch }) => {
     setLoading(true)
     let params = {
       action: 'cc_actions',
-      do: 'ZIP_SUBMIT',
+      do: 'GENERATE_ZIP',
       email,
       zips,
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
-    console.log(response.data)
+    setMessage(response.data)
     setLoading(false)
   }
 
@@ -95,6 +97,8 @@ export default ({ zips, dispatch }) => {
       ) : (
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
+
+      {message && message}
       
       { Object.entries(zips).length > 0 ? Object.entries(zips).map(folder => {
         const [key, val] = folder
