@@ -20,9 +20,15 @@ const CartButton = ({
 }) => (
   <AppContext.Consumer>
     {({state, dispatch}) => {
-      const Icon = state.cart.hasOwnProperty(slug) 
+      console.log(file)
+      let Icon = state.cart.hasOwnProperty(slug)
         ? MdRemoveShoppingCart
         : MdAddShoppingCart
+      if (type === 'TOGGLE_CART_ITEM') {
+        Icon = state.cart.hasOwnProperty(slug) && state.cart[slug].includes(file)
+          ? MdRemoveShoppingCart
+          : MdAddShoppingCart
+      }
 
       const handleClick = () => {
         if (type === 'TOGGLE_CART_ITEM') {

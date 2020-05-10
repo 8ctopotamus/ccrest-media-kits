@@ -12,7 +12,7 @@ export default (state, action) => {
   let file
   switch(action.type) {
     case 'GET_LOCALSTORAGE':
-      if (window && window.localStorage && localStorage.getItem(LS_KEY)) {
+      if (window && window.localStorage && localStorage.getItem(LS_KEY) !== 'undefined') {
         return JSON.parse(localStorage.getItem(LS_KEY))
       }
       return state
@@ -65,6 +65,17 @@ export default (state, action) => {
             [slug]: hasFile 
               ? state.cart[slug].filter(f => f !== file)
               : [...state.cart[slug], file]
+          }
+        }
+
+        if (updatedState.cart[slug].length === 0)
+          delete updatedState.cart[slug]
+      } else {
+        updatedState = {
+          ...state,
+          cart: {
+            ...state.cart,
+            [slug]: [file]
           }
         }
       }

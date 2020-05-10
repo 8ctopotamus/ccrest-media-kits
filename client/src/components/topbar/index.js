@@ -9,6 +9,8 @@ export default () => (
         const targetView = isCartView
           ? null
           : 'CART'
+        const cartAmt = Object.values(state.cart)
+          .reduce((prev, curr) => (prev + curr.length), 0)
         return (
           <div className="topbar">
             <div
@@ -27,7 +29,7 @@ export default () => (
                 ) : (
                   <>
                     <MdShoppingCart size="25" /> 
-                    <span>{Object.keys(state.cart).length}</span>
+                    <span>{cartAmt}</span>
                   </>
                 )}
             </div>
