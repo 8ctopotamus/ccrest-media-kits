@@ -20,7 +20,6 @@ const CartButton = ({
 }) => (
   <AppContext.Consumer>
     {({state, dispatch}) => {
-      console.log(file)
       let Icon = state.cart.hasOwnProperty(slug)
         ? MdRemoveShoppingCart
         : MdAddShoppingCart

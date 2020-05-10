@@ -14,7 +14,7 @@ const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Obj
   ? user.user_email
   : ''
 
-export default ({ files, dispatch }) => {
+export default ({ cart, dispatch }) => {
   const [email, setEmail] = useState(defaultEmail)
   const [loading, setLoading] = useState(false)
 
@@ -25,13 +25,15 @@ export default ({ files, dispatch }) => {
       action: 'cc_actions',
       do: 'CART_SUBMIT',
       email,
-      files,
+      cart,
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
     console.log(response.data)
     setLoading(false)
   }
+
+  console.log(cart)
 
   return (
     <Animated 
@@ -66,8 +68,9 @@ export default ({ files, dispatch }) => {
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
       
-      { Object.entries(files) > 0 ? Object.entries(files).map(pack => {
-        const [key, val] = pack
+      { Object.entries(cart).length > 0 ? Object.entries(cart).map(folder => {
+        const [key, val] = folder
+        console.log(folder)
         return (
           <div key={key}>
             <h3>{key}</h3>
@@ -78,7 +81,7 @@ export default ({ files, dispatch }) => {
                   type: 'TOGGLE_CART_ITEM',
                   payload: {
                     slug: key,
-                    file: file
+                    files: file
                   },
                 })} />
               </li>
@@ -86,7 +89,7 @@ export default ({ files, dispatch }) => {
           </div>
         )
       }) : (
-        <p style={{marginTop: 50}}>Looks like you need to add some files to your cart.</p>
+        <p style={{marginTop: 50}}>Looks like you need to add some kits to your cart.</p>
       )}
     </Animated>
   )

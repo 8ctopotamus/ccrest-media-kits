@@ -17,10 +17,12 @@ export default (state, action) => {
       }
       return state
     case 'SET_VIEW':
-      return {
+      updatedState = {
         ...state,
         view: action.payload
       }
+      updateLocalStorage(updatedState)
+      return updatedState
     case 'UPDATE_SEARCH':
       return {
         ...state,
@@ -53,7 +55,6 @@ export default (state, action) => {
       updateLocalStorage(updatedState)
       return updatedState
     case 'TOGGLE_CART_ITEM':
-      console.log(action.payload)
       slug = action.payload.slug
       file = action.payload.files
       if (state.cart.hasOwnProperty(slug)) {
@@ -67,7 +68,6 @@ export default (state, action) => {
               : [...state.cart[slug], file]
           }
         }
-
         if (updatedState.cart[slug].length === 0)
           delete updatedState.cart[slug]
       } else {
