@@ -13,17 +13,15 @@ export default ({ item }) => {
     <AppContext.Consumer>
       {({ state, dispatch }) => {
         const fileCount = files.length
-        const firstFile = files[0]
+        const firstFile = (fileCount > 0) && files[0]
         const isImage = firstFile.type === 'image'
         const featuredImage = isImage
           ? firstFile.url
           : firstFile.icon
-
         const launchDetailView = () => dispatch({
           type: 'SET_CURRENT',
           payload: item,
         })
-        
         return (
           <div className="result">
             <div

@@ -11,10 +11,9 @@ const wp_data = window.wp_data
 
 const { admin_ajax_url, user } = wp_data
 
-const defaultEmail = ''
-//  (Object.keys(user).length !== 0 && user.constructor === Object)
-//   ? user.user_email
-//   : ''
+const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Object)
+  ? user.user_email
+  : ''
 
 const Grid = styled.div`
   display: flex;

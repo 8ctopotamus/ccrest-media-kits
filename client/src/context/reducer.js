@@ -1,4 +1,5 @@
 import { LS_KEY } from './index'
+import { defaultState } from '.'
 
 const updateLocalStorage = state => {
   if (window && window.localStorage && localStorage.getItem(LS_KEY) !== 'undefined') {
@@ -13,7 +14,8 @@ export default (state, action) => {
   switch(action.type) {
     case 'GET_LOCALSTORAGE':
       if (window && window.localStorage && localStorage.getItem(LS_KEY) !== 'undefined') {
-        return JSON.parse(localStorage.getItem(LS_KEY))
+        const ls = localStorage.getItem(LS_KEY)
+        return ls ? JSON.parse(ls) : defaultState
       }
       return state
     case 'SET_VIEW':

@@ -51,9 +51,11 @@ function ccrest_enqueue_scripts_styles() {
 
   wp_register_style( 'animate_css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' );
 
+  $testing = false; // DEVS, make this TRUE to test compiled react app on Localhost
+
   // localhost
-  if ( $isLocalhost ) {
-  //   $react_app_js = 'http://localhost:3000/static/js/bundle.js';
+  if ( $isLocalhost && !$testing ) {
+    $react_app_js = 'http://localhost:3000/static/js/bundle.js';
   } 
   // production
   else {
@@ -68,18 +70,18 @@ function ccrest_enqueue_scripts_styles() {
     }
   }
 
-  if ( !file_exists($react_app_js) ) {
-    $noteification = $isLocalhost 
-    ? 'Are you running the React app server?'
-    : 'Did you compile the React app?';
-    echo '[' . PLUGIN_SLUG . '] ' . $noteification;
-  }
+  // if ( !file_exists($react_app_js) ) {
+  //   $noteification = $isLocalhost 
+  //   ? 'Are you running the React app server?'
+  //   : 'Did you compile the React app?';
+  //   echo '[' . PLUGIN_SLUG . '] ' . $noteification;
+  // }
 
   wp_register_script( 'react_app_js', $react_app_js, array(), false, true );
 
   if ( $shortcode_found && $react_app_js ) {
     wp_enqueue_style('animate_css');
-    if ( $isLocalhost ) {
+    if ( !$isLocalhost ) {
       wp_enqueue_style('react_app_css');
     }
     $appData = cc_get_wp_data();

@@ -6,8 +6,8 @@ import AppContext from '../../context'
 export default () => (
   <AppContext.Consumer>
       {({state, dispatch}) => {
-        const isCartView = state.view === 'ZIP'
-        const targetView = isCartView
+        const isZIPView = state && state.view && state.view === 'ZIP'
+        const targetView = isZIPView
           ? null
           : 'ZIP'
         const zipsAmt = Object.values(state.zips)
@@ -21,7 +21,7 @@ export default () => (
                 payload: targetView
               })}
             >
-              {isCartView
+              {isZIPView
                 ? (
                   <>  
                     <span>Keep browsing</span>

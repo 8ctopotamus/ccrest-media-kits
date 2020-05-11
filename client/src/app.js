@@ -17,10 +17,9 @@ const App = () => {
       <AppProvider>
         <div id="app">
           <ZIPCount />
-          
           <AppContext.Consumer>
             {({state, dispatch}) => (
-              state.view === 'ZIP'
+              state && state.view && state.view === 'ZIP'
                 ? <ZIP zips={state.zips} dispatch={dispatch} />
                 : <Search 
                     state={state} 

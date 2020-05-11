@@ -121,7 +121,10 @@ function remoteFileExists($url) {
 function cc_get_wp_data() {
   $data = [];
   // assets
-  $args = ['post_type'  => 'assets'];
+  $args = [
+    'post_type'  => 'assets',
+    'posts_per_page' => -1,
+  ];
   $the_query = new WP_Query( $args );
   if ( $the_query->have_posts() ) {
     while ( $the_query->have_posts() ) {

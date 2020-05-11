@@ -1,12 +1,14 @@
 import { createContext } from 'react'
 
-const AppContext = createContext({
-  view: 'SEARCH',
+export const defaultState = {
+  view: null,
   current: null,
   search: '',
   filters: [],
   zips: {},
-})
+}
+
+const AppContext = createContext(defaultState)
 
 export default AppContext
 
