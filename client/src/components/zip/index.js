@@ -42,7 +42,7 @@ const RemoveButton = styled.button`
   }
 `
 
-export default ({ zips, dispatch }) => {
+export default ({ toZip, dispatch }) => {
   const [email, setEmail] = useState(defaultEmail)
   const [message, setMessage] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -54,7 +54,7 @@ export default ({ zips, dispatch }) => {
       action: 'cc_actions',
       do: 'GENERATE_ZIP',
       email,
-      zips,
+      toZip,
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
@@ -99,10 +99,10 @@ export default ({ zips, dispatch }) => {
 
       {message && message}
       
-      { Object.entries(zips).length > 0 ? Object.entries(zips).map(folder => {
+      { Object.entries(toZip).length > 0 ? Object.entries(toZip).map(folder => {
         const [key, val] = folder
         return (
-          <>
+          <section key={key}>
             <h3 style={{marginTop: 60}}>{key}</h3>
             <Grid key={key}>
               {val.map(file => (
@@ -122,7 +122,7 @@ export default ({ zips, dispatch }) => {
                 </Thumb>
               ))}
             </Grid>
-          </>
+          </section>
         )
       }) : (
         <p style={{marginTop: 50}}>Looks like you need to add some files to your download.</p>

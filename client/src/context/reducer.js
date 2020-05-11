@@ -37,6 +37,14 @@ export default (state, action) => {
           ? state.filters.filter(saved => saved !== action.payload)
           : [...state.filters, action.payload]
       }
+    case 'RESET_SEARCH':
+      console.log('test')
+      updatedState = {
+        ...state,
+        search: '',
+        filters: [],
+      }
+      return updatedState
     case 'TOGGLE_ZIP_FOLDER':
       if (!action.payload.slug) {
         throw Error('No slug provided')

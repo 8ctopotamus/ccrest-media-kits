@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MdFilterList, MdClose } from 'react-icons/md'
+import { MdFilterList, MdClose, MdRestore } from 'react-icons/md'
 import AppContext from '../../context'
 
 const Controls = ({ cats }) => (
@@ -15,6 +15,11 @@ const Controls = ({ cats }) => (
           type="search" 
           style={{marginBottom: 25}}
         />
+
+        <button onClick={() => dispatch({ type: 'RESET_SEARCH' })}>
+          <MdRestore /> Reset
+        </button>
+
         {cats.map(cat => (
           <div key={cat.slug}>
             <strong>{cat.cat_name}</strong>

@@ -20,7 +20,7 @@ const App = () => {
           <AppContext.Consumer>
             {({state, dispatch}) => (
               state && state.view && state.view === 'ZIP'
-                ? <ZIP zips={state.zips} dispatch={dispatch} />
+                ? <ZIP toZip={state.zips} dispatch={dispatch} />
                 : <Search 
                     state={state} 
                     dispatch={dispatch}
