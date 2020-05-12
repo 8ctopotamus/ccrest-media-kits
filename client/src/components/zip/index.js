@@ -33,12 +33,19 @@ const Thumb = styled.div`
 const RemoveButton = styled.button`
   background: 'blue';
   border-radius: 100%;
+  border: 1px solid red;
   padding: 10px;
   position: absolute;
   top: -15px;
   right: -15px;
+  svg {
+    fill: red;
+  }
   &:hover {
     background: red;
+  }
+  &:hover svg {
+    fill: blue;
   }
 `
 
@@ -58,7 +65,11 @@ export default ({ toZip, dispatch }) => {
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
-    setMessage(response.data)
+    let msg = `Success! We are emailing you your download link. You can also <a href="${response.data}" download>download your media now</a>. Your download link will expire after 7 days.`
+    if (response.state === 500) {
+      msg = 'Error creating ZIP'
+    }
+    setMessage(msg)
     setLoading(false)
   }
 
@@ -97,7 +108,7 @@ export default ({ toZip, dispatch }) => {
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
 
-      {message && message}
+      { message && <p dangerouslySetInnerHTML={{__html: message}} />}
       
       { Object.entries(toZip).length > 0 ? Object.entries(toZip).map(folder => {
         const [key, val] = folder
@@ -106,7 +117,7 @@ export default ({ toZip, dispatch }) => {
             <h3 style={{marginTop: 60}}>{key}</h3>
             <Grid key={key}>
               {val.map(file => (
-                <Thumb key={file} backgroundImage={file}>
+                <Thumb className="thumb" key={file} backgroundImage={file}>
                   <RemoveButton
                     className="remove-button"
                     onClick={() => dispatch({

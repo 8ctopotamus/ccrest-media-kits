@@ -60,7 +60,7 @@ export default ({ slug, file }) => {
   const image = type === 'image' ? url : icon
   
   return (
-    <File>
+    <File className="file">
       <Preview
         onClick={() => setShowDetails(!showDetails)}
         image={image}

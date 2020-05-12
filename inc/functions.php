@@ -3,21 +3,17 @@
 function GENERATE_ZIP () {
   $to = $_POST['email'];
   $toZip = $_POST['toZip'];
-
+  $status = 200;
   if (empty($to)) {
     die('No email provided');
   }
-
   if (count($toZip) === 0) {
     die('No files provided');
   }
-
-  
-  
-  // var_dump($toZip);
-
+  $newFileName = 'test_new.zip';
+  $newFilePath = CCREST_MEDIA_KITS_ZIP_STORAGE . '/' . $newFileName;
   $zip = new ZipArchive;
-  if ($zip->open(CCREST_MEDIA_KITS_ZIP_STORAGE . '/test_new.zip', ZipArchive::CREATE) === TRUE)
+  if ($zip->open($newFilePath, ZipArchive::CREATE) === TRUE)
   {
     foreach ($toZip as $folder) {
       foreach ($folder as $file) {
@@ -26,16 +22,19 @@ function GENERATE_ZIP () {
       }
     }
     $zip->close();
-    echo 'ok';
+  } else {
+    $status = 500;
+  }
+  if (file_exists($newFilePath)) {
+    $downloadPath = wp_upload_dir()['baseurl'] . '/ccrest-media-kits-storage/' . $newFileName;
+    echo $downloadPath;
+    http_response_code($status);
   } else {
     echo 'ZIP creation failed';
+    http_response_code($status);
   }
-
-  echo 'success';
-  // return file_exists($destination);
   die();
 }
-
 
 
 function cc_get_wp_data() {
