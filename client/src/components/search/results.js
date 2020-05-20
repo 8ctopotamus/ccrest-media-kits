@@ -22,13 +22,18 @@ export default ({ items }) => (
                 })
                 // keywords: titles & tags
                 .filter(
-                  item => state.search === ''
+                  item => {
+                    const searchTerm = state.search.toLowerCase()
+                    return searchTerm === ''
                     ? true
-                    : ( item.post_title 
+                    : ( 
+                        item.post_title 
                           .toLowerCase()
-                          .includes(state.search) ||
+                          .includes(searchTerm) ||
                         item.tags
-                          .find(tag => tag.toLowerCase().includes(state.search)) )
+                          .find(tag => tag.toLowerCase().includes(searchTerm))
+                      )
+                  }
                 )
                 .map((item, i) => (
                   <Animated

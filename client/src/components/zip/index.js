@@ -24,7 +24,7 @@ const Thumb = styled.div`
   background-image: url(${props => props.backgroundImage ? props.backgroundImage : null});
   background-color: grey;
   position: relative;
-  background-size: cover;
+  background-size: contain;
   width: 150px;
   height: 150px;
   margin: 15px;

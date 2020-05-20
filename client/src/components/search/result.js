@@ -29,7 +29,7 @@ export default ({ item }) => {
               onClick={launchDetailView}
               style={{
                 backgroundImage: `url(${featuredImage})`,
-                backgroundSize: isImage ? 'cover': 'auto',
+                backgroundSize: isImage ? 'contain': 'auto',
               }}
             />
             <div className="result-inner">

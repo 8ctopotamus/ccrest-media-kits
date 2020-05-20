@@ -18,7 +18,7 @@ const Preview = styled.div`
   background-position: center;
   cursor: pointer;
   background-image: ${props => props.image ? `url(${props.image})`: 'none'};
-  background-size: cover;
+  background-size: contain;
   &:hover {
     opacity: .85;
   }

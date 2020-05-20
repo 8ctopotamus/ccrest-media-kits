@@ -37,6 +37,25 @@ function GENERATE_ZIP () {
 }
 
 
+/**
+ * Check if given term has child terms
+ *
+ * https://wordpress.stackexchange.com/questions/176317/check-if-current-category-has-subcategories/176332
+ * @param Integer $term_id
+ * @param String $taxonomy
+ *
+ * @return Boolean
+ */
+function category_has_children( $term_id = 0, $taxonomy = 'category' ) {
+  $children = get_categories( array( 
+      'child_of'      => $term_id,
+      'taxonomy'      => $taxonomy,
+      'hide_empty'    => false,
+      'fields'        => 'ids',
+  ) );
+  return ( $children );
+}
+
 function cc_get_wp_data() {
   $data = [];
   // assets
@@ -62,38 +81,40 @@ function cc_get_wp_data() {
       $tags = get_the_tags($p->ID);
       if ($tags) {
         foreach($tags as $t) {
-          $p->tags[] = $t->slug;
+          $p->tags[] = $t->name;
         }
       }
       $data['assets'][] = $p;
     }
   }
   wp_reset_postdata();
-  // categories data
+  // categories data for the filter
   $allcats = get_categories([
     'type'                     => 'assets',
     'taxonomy'                 => 'category',
     'hide_empty'               => 1,
     'hierarchical'             => 1,
+    'childless' => false,
   ]);
   // find parents
-  $parents = $all_ids = array();
-  foreach ($allcats as $cats) {
-    if ($cats->category_parent === 0 ) {
-      $cats->children = array();
-      $parents[] = $cats;
+  $parents =  array();
+  foreach ($allcats as $cat) {
+    if ($cat->category_parent === 0 && count(category_has_children($cat->term_id)) > 0 ) {
+      $cat->children = array();
+      $parents[] = $cat;
     }
   }
   //  find children and assign it to corresponding parrent  
-  foreach ($allcats as $cats) {
-    if ($cats->category_parent != 0) {
+  foreach ($allcats as $cat) {
+    if ($cat->category_parent != 0) {
       foreach ($parents as $parent) {
-        if ($cats->category_parent === $parent->term_id) {
-          $parent->children[] = $cats;
+        if ($cat->category_parent === $parent->term_id) {
+          $parent->children[] = $cat;
         }
       }
     }
   }
+  // remove empty parents
   $data['categories'] = $parents;
   return $data;
   exit;
