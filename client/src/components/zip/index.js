@@ -21,9 +21,6 @@ const Flex = styled.div`
   flex-wrap: wrap;
 `
 
-// background-image: url(${props => props.backgroundImage ? props.backgroundImage : null});
-// background-color: grey;
-// background-size: contain;
 const Thumb = styled.div`
   position: relative;
   background: white;
@@ -67,6 +64,7 @@ export default ({ toZip, dispatch }) => {
     }
     params = qs.stringify(params)
     const response = await axios.post(admin_ajax_url, params)
+    console.log(response)
     let msg = `Success! We are emailing you your download link. You can also <a href="${response.data}" download>download your media now</a>. Your download link will expire after 7 days.`
     if (response.state === 500) {
       msg = 'Error creating ZIP'
@@ -83,7 +81,7 @@ export default ({ toZip, dispatch }) => {
       <h2>My Downloads</h2>
       <p>Enter your email so we can send you a download link!</p>
       {wp_data && admin_ajax_url ? (
-        <form onSubmit={handleSubmit} className="grid col-2-1-1">
+        <form onSubmit={handleSubmit} className="email-downloads-form">
           <div>
             <label htmlFor="email" className="sr-only">Email</label>
             <input

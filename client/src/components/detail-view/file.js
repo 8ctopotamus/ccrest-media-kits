@@ -13,26 +13,19 @@ const File = styled.div`
   margin-bottom: 30px;
 `
 
-// const Preview = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   height: 300px;
-//   width: 100%;
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   cursor: pointer;
-//   background-image: ${props => props.image ? `url(${props.image})`: 'none'};
-//   background-size: contain;
-//   &:hover {
-//     opacity: .9;
-//   }
-// `
+const PreviewContainer = styled.div`
+  height: 300px;
+  width: 100%;
+  &:hover {
+    opacity: .9;
+  }
+`
 
 const Details = styled.div`
   background: rgba(0,0,0,.5);
   color: white;
   padding: 10px;
+  height: 100%;
 `
 
 const Heading = styled.h6`
@@ -64,15 +57,15 @@ export default ({ slug, file }) => {
   const [showDetails, setShowDetails] = useState(false)
   
   const image = type === 'image' ? url : icon
-  
+
   return (
     <File className="file">
-      <Preview
-        //onClick={() => setShowDetails(!showDetails)}
-        imageURL={image}
-      >
-        {showDetails && (
-          <Details>
+      <PreviewContainer >
+        {!showDetails ? (
+          <Preview imageURL={image} onClick={() => setShowDetails(!showDetails)} />
+        ) : (
+          <Details onClick={() => setShowDetails(!showDetails)}>
+            <h3>{title}</h3>
             <p>{description}</p>
             <ul>
               <li>{width} &times; {height}px</li>
@@ -80,9 +73,10 @@ export default ({ slug, file }) => {
             </ul>
           </Details>
         )}
-      </Preview>
+      </PreviewContainer>
+      
       <div className="result-inner">
-        <Heading>{title} <small>({subtype})</small></Heading>
+      <Heading>{title} <small>({subtype})</small> {showDetails.toString()}</Heading>
       </div>
       <Actions>
         <a

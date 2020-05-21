@@ -27,13 +27,25 @@ function GENERATE_ZIP () {
   }
   if (file_exists($newFilePath)) {
     $downloadPath = wp_upload_dir()['baseurl'] . '/ccrest-media-kits-storage/' . $newFileName;
-    echo $downloadPath;
-    http_response_code($status);
+    $sent = send_download_email($to, $downloadPath);
+    if ($sent) {
+      echo $downloadPath;
+      http_response_code($status);
+    } else {
+      echo 'Emailing failed.';
+      http_response_code(500);
+    }
   } else {
     echo 'ZIP creation failed';
     http_response_code($status);
   }
   die();
+}
+
+function send_download_email ($to, $downloadPath) {
+  $subject = 'Download your CedarCrest Media Kits!';
+  $body = "Here is your download link: $downloadPath. It will expire after 7 days.";
+  return wp_mail( $to, $subject, $body, $headers );
 }
 
 

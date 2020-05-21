@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MdArrowBack, MdSearch } from 'react-icons/md'
+import { MdSearch } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import File from './file'
 import CartButton from '../zip/toggle-button'
@@ -16,6 +16,8 @@ const ThumbGrid = styled.div`
 
 const Tag = styled.li`
   list-style: none;
+  margin-left: 0;
+  padding-left: 0;
 `
 
 export default ({state, dispatch}) => {
@@ -45,7 +47,7 @@ export default ({state, dispatch}) => {
             cursor: 'pointer',
           }}
         >
-          <MdArrowBack size="25" /> <MdSearch /> <span>Search</span>
+          <MdSearch /> <span>Back to search</span>
         </span>
         <CartButton 
           text="Add all"
@@ -63,7 +65,6 @@ export default ({state, dispatch}) => {
       <div className="grid gap col-3-1">
         <div>
           <div dangerouslySetInnerHTML={{__html: post_content}} />
-          <h2>What's included?</h2>
           <ThumbGrid>
             {files && files.map(file => (
               <File
@@ -76,21 +77,21 @@ export default ({state, dispatch}) => {
         </div>
         <div>
           <h4>Categories</h4>
-          {categories.length > 0 && (
+          {categories.length > 0 ? (
             <ul className="cats">
             {categories.map(cat => (
               <Tag key={cat}>{cat}</Tag>
             ))}
             </ul>
-          )}
+          ) : <em>This kit is not categorized</em>}
           <h4>Tags</h4>
-          {tags.length > 0 && (
+          {tags.length > 0 ? (
             <ul className="tag-cloud">
               {tags.map(tag => (
                 <li key={tag}>{tag}</li>
               ))}
             </ul>
-          )}
+          ) : <em>This kit is not categorized</em>}
         </div>
       </div>
     </Animated>
