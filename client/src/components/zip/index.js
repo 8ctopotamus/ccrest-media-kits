@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import qs from 'qs'
 import { MdClose } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
+import Preview from '../lazy-image'
 
 const wp_data = window.wp_data 
     ? window.wp_data
@@ -15,16 +16,17 @@ const defaultEmail = (Object.keys(user).length !== 0 && user.constructor === Obj
   ? user.user_email
   : ''
 
-const Grid = styled.div`
+const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
 
+// background-image: url(${props => props.backgroundImage ? props.backgroundImage : null});
+// background-color: grey;
+// background-size: contain;
 const Thumb = styled.div`
-  background-image: url(${props => props.backgroundImage ? props.backgroundImage : null});
-  background-color: grey;
   position: relative;
-  background-size: contain;
+  background: white;
   width: 150px;
   height: 150px;
   margin: 15px;
@@ -115,7 +117,7 @@ export default ({ toZip, dispatch }) => {
         return (
           <section key={key}>
             <h3 style={{marginTop: 60}}>{key}</h3>
-            <Grid key={key}>
+            <Flex key={key}>
               {val.map(file => (
                 <Thumb className="thumb" key={file} backgroundImage={file}>
                   <RemoveButton
@@ -130,9 +132,15 @@ export default ({ toZip, dispatch }) => {
                   >
                     <MdClose />
                   </RemoveButton>
+                  <Preview
+                    imageURL={file}
+                    height="150px"
+                    width="150px"
+                    background="white" 
+                  />
                 </Thumb>
               ))}
-            </Grid>
+            </Flex>
           </section>
         )
       }) : (

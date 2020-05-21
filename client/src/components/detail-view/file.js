@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MdCloudDownload } from 'react-icons/md'
 import CartButton from '../zip/toggle-button'
+import Preview from '../lazy-image'
 
 const File = styled.div`
   display: flex;
@@ -12,21 +13,21 @@ const File = styled.div`
   margin-bottom: 30px;
 `
 
-const Preview = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 300px;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  background-image: ${props => props.image ? `url(${props.image})`: 'none'};
-  background-size: contain;
-  &:hover {
-    opacity: .9;
-  }
-`
+// const Preview = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   height: 300px;
+//   width: 100%;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   cursor: pointer;
+//   background-image: ${props => props.image ? `url(${props.image})`: 'none'};
+//   background-size: contain;
+//   &:hover {
+//     opacity: .9;
+//   }
+// `
 
 const Details = styled.div`
   background: rgba(0,0,0,.5);
@@ -67,9 +68,8 @@ export default ({ slug, file }) => {
   return (
     <File className="file">
       <Preview
-        onClick={() => setShowDetails(!showDetails)}
-        image={image}
-        className="result-preview"
+        //onClick={() => setShowDetails(!showDetails)}
+        imageURL={image}
       >
         {showDetails && (
           <Details>
@@ -91,7 +91,7 @@ export default ({ slug, file }) => {
           title="Download file"
           download
         >
-          <MdCloudDownload size="25" color="black" />
+          <MdCloudDownload size="25" color="black" style={{marginRight: 10}} />
           Download
         </a>
         <CartButton

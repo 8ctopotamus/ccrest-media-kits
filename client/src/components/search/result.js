@@ -2,6 +2,7 @@ import React from 'react'
 import { MdPageview } from 'react-icons/md'
 import AppContext from '../../context'
 import CartButton from '../zip/toggle-button'
+import Preview from '../lazy-image'
 
 export default ({ item }) => {
   const {
@@ -24,14 +25,7 @@ export default ({ item }) => {
         })
         return (
           <div className="result">
-            <div
-              className="result-preview" 
-              onClick={launchDetailView}
-              style={{
-                backgroundImage: `url(${featuredImage})`,
-                backgroundSize: isImage ? 'contain': 'auto',
-              }}
-            />
+            <Preview imageURL={featuredImage} onClick={launchDetailView} />
             <div className="result-inner">
               <h6>{post_title}</h6>
             </div>
