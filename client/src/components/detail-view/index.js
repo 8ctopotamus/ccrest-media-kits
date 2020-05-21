@@ -9,6 +9,13 @@ const ThumbGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+`
+
+const Tag = styled.li`
+  list-style: none;
 `
 
 export default ({state, dispatch}) => {
@@ -72,7 +79,7 @@ export default ({state, dispatch}) => {
           {categories.length > 0 && (
             <ul className="cats">
             {categories.map(cat => (
-              <li key={cat}>{cat}</li>
+              <Tag key={cat}>{cat}</Tag>
             ))}
             </ul>
           )}

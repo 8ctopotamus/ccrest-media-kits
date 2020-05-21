@@ -10,7 +10,7 @@ function GENERATE_ZIP () {
   if (count($toZip) === 0) {
     die('No files provided');
   }
-  $newFileName = 'test_new.zip';
+  $newFileName = 'media-kit-' . $to . '.zip';
   $newFilePath = CCREST_MEDIA_KITS_ZIP_STORAGE . '/' . $newFileName;
   $zip = new ZipArchive;
   if ($zip->open($newFilePath, ZipArchive::CREATE) === TRUE)
@@ -39,7 +39,6 @@ function GENERATE_ZIP () {
 
 /**
  * Check if given term has child terms
- *
  * https://wordpress.stackexchange.com/questions/176317/check-if-current-category-has-subcategories/176332
  * @param Integer $term_id
  * @param String $taxonomy
@@ -90,11 +89,10 @@ function cc_get_wp_data() {
   wp_reset_postdata();
   // categories data for the filter
   $allcats = get_categories([
-    'type'                     => 'assets',
-    'taxonomy'                 => 'category',
-    'hide_empty'               => 1,
-    'hierarchical'             => 1,
-    'childless' => false,
+    'type'          => 'assets',
+    'taxonomy'      => 'category',
+    'hide_empty'    => 1,
+    'hierarchical'  => 1,
   ]);
   // find parents
   $parents =  array();

@@ -9,9 +9,13 @@ const File = styled.div`
   background: white;
   height: 100%;
   box-shadow: 1px 1px 9px rgba(0,0,0,.15);
+  margin-bottom: 30px;
 `
 
 const Preview = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 300px;
   width: 100%;
   background-repeat: no-repeat;
@@ -20,7 +24,7 @@ const Preview = styled.div`
   background-image: ${props => props.image ? `url(${props.image})`: 'none'};
   background-size: contain;
   &:hover {
-    opacity: .85;
+    opacity: .9;
   }
 `
 
@@ -36,6 +40,7 @@ const Heading = styled.h6`
 
 const Actions = styled.div`
   margin-top: auto;
+  margin-bottom: 10px;
   display: flex;
   justify-content: flex-end;
   & > * { margin-right: 10px;}
