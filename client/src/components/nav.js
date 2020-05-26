@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MdClose, MdArrowBack, MdShoppingCart } from 'react-icons/md'
+import { MdClose, MdArrowBack } from 'react-icons/md'
+import { FaCartArrowDown } from 'react-icons/fa'
 import { GrCart } from 'react-icons/gr'
 import AppContext from '../context'
 
@@ -12,6 +13,7 @@ const Nav = styled.div`
   padding: 25px;
   margin-bottom: 25px;
   color: white;
+  z-index: 100;
 `
 
 const Button = styled.div`
@@ -34,10 +36,16 @@ export default () => (
           <Nav>
             {state.current && (
               <Button 
-                onClick={() => dispatch({
-                  type: 'SET_CURRENT',
-                  payload: null,
-                })}
+                onClick={() => {
+                  dispatch({
+                    type: 'SET_CURRENT',
+                    payload: null,
+                  })
+                  dispatch({
+                    type: 'SET_VIEW',
+                    payload: 'SEARCH',
+                  })
+                }}
                 style={{
                   fontSize: 22,
                   display: 'flex',
@@ -65,7 +73,7 @@ export default () => (
                 ) : (
                   <>
                     { zipsAmt > 0 ? (
-                      <MdShoppingCart size="25" style={{marginRight: 6}} color="white" />
+                      <FaCartArrowDown size="25" style={{marginRight: 6}} color="white" />
                     ) : (
                       <GrCart size="25" style={{marginRight: 6}} color="white" />
                     ) }

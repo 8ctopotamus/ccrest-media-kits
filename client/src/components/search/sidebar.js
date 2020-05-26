@@ -1,7 +1,26 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { MdFilterList, MdClose, MdRestore } from 'react-icons/md'
-import { Animated } from 'react-animated-css'
 import AppContext from '../../context'
+
+const Sidebar = styled.div`
+  background: #44acdf;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  z-index: 100;
+  padding: 15px;
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+  }
+  input[type="checkbox"] {
+    margin: 0 10px 0 0;
+  }
+`
 
 const Controls = ({ cats }) => (
   <AppContext.Consumer>
@@ -69,9 +88,9 @@ export default ({ cats }) => {
           }
         </div>
       </div>
-      <div className="sidebar animated slideInLeft">
+      <Sidebar className="sidebar animated slideInLeft">
         <Controls cats={cats} />
-      </div>
+      </Sidebar>
     </div>
   )
 }

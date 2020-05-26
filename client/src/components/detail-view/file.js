@@ -41,6 +41,19 @@ const Actions = styled.div`
   svg { cursor: pointer; }
 `
 
+const HoverIcon = styled.a`
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 10px;
+  margin: 30px;
+  text-decoration: none;
+  &:hover {
+    background: #3d9ac8;
+    color: white;
+  }
+`
+
 export default ({ slug, file }) => {
   const {
     description,
@@ -80,15 +93,14 @@ export default ({ slug, file }) => {
       </Heading>
 
       <Actions>
-        <a
+        <HoverIcon
           href={url}
-          className="hover-icon"
           title="Download file"
           download
         >
           <MdCloudDownload size="25" color="black" style={{marginRight: 10}} />
           Download File
-        </a>
+        </HoverIcon>
         <CartButton
           slug={slug}
           file={url}

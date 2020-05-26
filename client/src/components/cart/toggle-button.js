@@ -1,11 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  MdAddShoppingCart,
-  MdRemoveShoppingCart
-} from 'react-icons/md'
-
+import styled from 'styled-components'
+import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 import AppContext from '../../context'
+
+const ToggleButton = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 10px;
+  margin: 30px;
+  cursor: pointer;
+  &:hover {
+    background: #3d9ac8;
+    color: white;
+  }
+`
 
 const CartButton = ({
   alternativeText,
@@ -59,14 +69,13 @@ const CartButton = ({
       }
 
       return (
-        <div 
-          className="zips-button"
+        <ToggleButton 
           onClick={handleClick}
           style={style}
         >
           <Icon size={size} color={color} className={className} />
           {alternativeText && isIncluded ? <span style={{marginLeft: 10}}>{alternativeText}</span> : text}
-        </div>
+        </ToggleButton>
       )
     }}
   </AppContext.Consumer>
