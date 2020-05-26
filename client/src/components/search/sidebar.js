@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { MdFilterList, MdClose, MdRestore } from 'react-icons/md'
+import { Animated } from 'react-animated-css'
 import AppContext from '../../context'
 
 const Controls = ({ cats }) => (
@@ -68,7 +69,7 @@ export default ({ cats }) => {
           }
         </div>
       </div>
-      <div className="sidebar">
+      <div className="sidebar animated slideInLeft">
         <Controls cats={cats} />
       </div>
     </div>

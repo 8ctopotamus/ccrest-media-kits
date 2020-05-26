@@ -1,7 +1,7 @@
 import React from 'react'
 import AppContext from './context'
 import AppProvider from './context/provider'
-import CartCount from './components/cart/count'
+import Nav from './components/nav'
 import Cart from './components/cart'
 import Search from './components/search'
 
@@ -16,7 +16,7 @@ const App = () => {
     return (
       <AppProvider>
         <div id="app">
-          <CartCount />
+          <Nav />
           <AppContext.Consumer>
             {({state, dispatch}) => (
               state && state.view && state.view === 'ZIP'

@@ -1,23 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MdClose, MdSearch, MdArrowBack } from 'react-icons/md'
-import { AiFillFileZip, AiOutlineFileZip } from 'react-icons/ai'
-import AppContext from '../../context'
-import mixins from '../../utils/mixins'
+import { MdClose, MdArrowBack, MdShoppingCart } from 'react-icons/md'
+import { GrCart } from 'react-icons/gr'
+import AppContext from '../context'
 
 const Nav = styled.div`
+  background: #3d9ac8;
   display: flex;
-  justify-content: flex-end;  
+  justify-content: flex-end;
   align-items: flex-end;
-  ${mixins.container}
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 25px;
+  margin-bottom: 25px;
+  color: white;
 `
 
 const Button = styled.div`
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 `
 
 export default () => (
@@ -45,8 +46,7 @@ export default () => (
                   marginRight: 'auto',
                 }}
               >
-                <MdArrowBack /> <span>Back to search</span> 
-                {/* <MdSearch /> */}
+                <MdArrowBack /> <span>Back to search</span>
               </Button>
             )}
 
@@ -65,11 +65,11 @@ export default () => (
                 ) : (
                   <>
                     { zipsAmt > 0 ? (
-                      <AiFillFileZip size="25" style={{marginRight: 6}} />
+                      <MdShoppingCart size="25" style={{marginRight: 6}} color="white" />
                     ) : (
-                      <AiOutlineFileZip size="25" style={{marginRight: 6}} />
+                      <GrCart size="25" style={{marginRight: 6}} color="white" />
                     ) }
-                    <strong>{zipsAmt} file{zipsAmt===1?'':'s'} ZIP'd for download</strong>
+                    <strong>{zipsAmt} file{zipsAmt===1?'':'s'}</strong>
                   </>
                 )}
             </Button>

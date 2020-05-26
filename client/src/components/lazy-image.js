@@ -7,7 +7,7 @@ const Preview = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${props => props.height ? props.height : '100%'};
+  height: ${props => props.height ? props.height : 'auto'};
   width: ${props => props.width ? props.width : '100%'};
   cursor: pointer;
   &:hover {
@@ -30,7 +30,7 @@ export default ({ imageURL, onClick, height, width }) => {
         onLoad={() => setReady(true)}
         src={imageURL}
         alt={imageURL}
-        style={{ display: ready ? 'block': 'none' }}
+        style={{ display: ready ? 'block': 'none', height: '100%' }}
       />
     </Preview>
   )

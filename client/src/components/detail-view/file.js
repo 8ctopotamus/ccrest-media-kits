@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MdCloudDownload } from 'react-icons/md'
 import CartButton from '../cart/toggle-button'
-import Preview from '../lazy-image'
+import LazyImage from '../lazy-image'
 
 const File = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const File = styled.div`
 `
 
 const PreviewContainer = styled.div`
-  height: 300px;
+  max-height: 300px;
   width: 100%;
   &:hover {
     opacity: .9;
@@ -62,7 +62,7 @@ export default ({ slug, file }) => {
     <File className="file">
       <PreviewContainer >
         {!showDetails ? (
-          <Preview imageURL={image} onClick={() => setShowDetails(!showDetails)} />
+          <LazyImage imageURL={image} onClick={() => setShowDetails(!showDetails)} />
         ) : (
           <Details onClick={() => setShowDetails(!showDetails)}>
             <h3>{title}</h3>
