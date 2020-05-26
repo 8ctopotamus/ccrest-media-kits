@@ -15,10 +15,10 @@ function GENERATE_ZIP () {
   $zip = new ZipArchive;
   if ($zip->open($newFilePath, ZipArchive::CREATE) === TRUE)
   {
-    foreach ($toZip as $folder) {
-      foreach ($folder as $file) {
+    foreach ($toZip as $folder => $files) {
+      foreach ($files as $file) {
         $download_file = file_get_contents($file);
-        $zip->addFromString(basename($file), $download_file);
+        $zip->addFromString($folder . '/' . basename($file), $download_file);
       }
     }
     $zip->close();
