@@ -5,6 +5,7 @@ import qs from 'qs'
 import { MdClose } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import Preview from '../lazy-image'
+import CartCount from './count'
 
 const wp_data = window.wp_data 
     ? window.wp_data

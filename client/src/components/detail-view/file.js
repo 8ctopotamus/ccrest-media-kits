@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MdCloudDownload } from 'react-icons/md'
-import CartButton from '../zip/toggle-button'
+import CartButton from '../cart/toggle-button'
 import Preview from '../lazy-image'
 
 const File = styled.div`
@@ -29,7 +29,7 @@ const Details = styled.div`
 `
 
 const Heading = styled.h6`
-  padding-left: 15px;
+  padding: 15px;
 `
 
 const Actions = styled.div`
@@ -74,10 +74,11 @@ export default ({ slug, file }) => {
           </Details>
         )}
       </PreviewContainer>
-      
-      <div className="result-inner">
-      <Heading>{title} <small>({subtype})</small> {showDetails.toString()}</Heading>
-      </div>
+
+      <Heading>
+        {title} <small>({subtype})</small>
+      </Heading>
+
       <Actions>
         <a
           href={url}
@@ -86,7 +87,7 @@ export default ({ slug, file }) => {
           download
         >
           <MdCloudDownload size="25" color="black" style={{marginRight: 10}} />
-          Download
+          Download File
         </a>
         <CartButton
           slug={slug}

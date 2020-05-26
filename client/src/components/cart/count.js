@@ -1,7 +1,24 @@
 import React from 'react'
-import { MdClose } from 'react-icons/md'
+import styled from 'styled-components'
+import { MdClose, MdSearch, MdArrowBack } from 'react-icons/md'
 import { AiFillFileZip, AiOutlineFileZip } from 'react-icons/ai'
 import AppContext from '../../context'
+import mixins from '../../utils/mixins'
+
+const Nav = styled.div`
+  display: flex;
+  justify-content: flex-end;  
+  align-items: flex-end;
+  ${mixins.container}
+  padding-top: 30px;
+  padding-bottom: 30px;
+`
+
+const Button = styled.div`
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+`
 
 export default () => (
   <AppContext.Consumer>
@@ -13,9 +30,27 @@ export default () => (
         const zipsAmt = Object.values(state.zips)
           .reduce((prev, curr) => (prev + curr.length), 0)
         return (
-          <div className="topbar">
-            <div
-              className="zips-count" 
+          <Nav>
+            {state.current && (
+              <Button 
+                onClick={() => dispatch({
+                  type: 'SET_CURRENT',
+                  payload: null,
+                })}
+                style={{
+                  fontSize: 22,
+                  display: 'flex',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  marginRight: 'auto',
+                }}
+              >
+                <MdArrowBack /> <span>Back to search</span> 
+                {/* <MdSearch /> */}
+              </Button>
+            )}
+
+            <Button
               onClick={() => dispatch({
                 type: 'SET_VIEW',
                 payload: targetView
@@ -37,8 +72,8 @@ export default () => (
                     <strong>{zipsAmt} file{zipsAmt===1?'':'s'} ZIP'd for download</strong>
                   </>
                 )}
-            </div>
-          </div>
+            </Button>
+          </Nav>
         )
       }}
   </AppContext.Consumer>

@@ -1,9 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MdSearch } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import File from './file'
-import CartButton from '../zip/toggle-button'
+import CartButton from '../cart/toggle-button'
+import Grid from '../grid'
+
+
+import mixins from '../../utils/mixins'
+
+
+const Header = styled.div`
+  display: flex;
+  `
+  // justify-content: space-between;
 
 const ThumbGrid = styled.div`
   display: grid;
@@ -33,22 +42,10 @@ export default ({state, dispatch}) => {
   return (
     <Animated 
       animationIn="fadeIn"
-      className="container detail-view"
+      className="container"
     >
-      <div className="detail-header">
-        <span 
-          onClick={() => dispatch({
-            type: 'SET_CURRENT',
-            payload: null,
-          })}
-          style={{
-            display: 'flex',
-            textDecoration: 'none',
-            cursor: 'pointer',
-          }}
-        >
-          <MdSearch /> <span>Back to search</span>
-        </span>
+      <Header>
+        <h1>{post_title}</h1>
         <CartButton 
           text="Add all"
           alternativeText="Remove all"
@@ -57,24 +54,21 @@ export default ({state, dispatch}) => {
           size="50"
           style={{ paddingLeft: 20, paddingRight: 20}}
         />
-      </div>
+      </Header>
 
-      <br/>
+      <div dangerouslySetInnerHTML={{__html: post_content}} />
       
-      <h1>{post_title}</h1>
-      <div className="grid gap col-3-1">
-        <div>
-          <div dangerouslySetInnerHTML={{__html: post_content}} />
-          <ThumbGrid>
-            {files && files.map(file => (
-              <File
-                file={file}
-                slug={slug}
-                key={file.ID}
-              />
-            ))}
-          </ThumbGrid>
-        </div>
+      <ThumbGrid>
+        {files && files.map(file => (
+          <File
+            file={file}
+            slug={slug}
+            key={file.ID}
+          />
+        ))}
+      </ThumbGrid>
+
+      <Grid>
         <div>
           <h4>Categories</h4>
           {categories.length > 0 ? (
@@ -84,6 +78,8 @@ export default ({state, dispatch}) => {
             ))}
             </ul>
           ) : <em>This kit is not categorized</em>}
+        </div>
+        <div>
           <h4>Tags</h4>
           {tags.length > 0 ? (
             <ul className="tag-cloud">
@@ -93,7 +89,7 @@ export default ({state, dispatch}) => {
             </ul>
           ) : <em>This kit is not categorized</em>}
         </div>
-      </div>
+      </Grid>
     </Animated>
   )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  FaPlusSquare,
-  FaMinusSquare
-} from 'react-icons/fa'
+  MdAddShoppingCart,
+  MdRemoveShoppingCart
+} from 'react-icons/md'
 
 import AppContext from '../../context'
 
@@ -29,13 +29,13 @@ const CartButton = ({
         isFileZipped = isFolderZipped && state.zips[slug].includes(file)
         isIncluded = isFileZipped
         Icon = isFileZipped
-          ? FaMinusSquare
-          : FaPlusSquare
+          ? MdRemoveShoppingCart
+          : MdAddShoppingCart
       } else {
         isIncluded = isFolderZipped
         Icon = isFolderZipped
-        ? FaMinusSquare
-        : FaPlusSquare
+        ? MdRemoveShoppingCart
+        : MdAddShoppingCart
       }
 
       const handleClick = () => {

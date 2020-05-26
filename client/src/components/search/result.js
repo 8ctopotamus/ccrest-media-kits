@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdPageview } from 'react-icons/md'
 import AppContext from '../../context'
-import CartButton from '../zip/toggle-button'
+import CartButton from '../cart/toggle-button'
 import Preview from '../lazy-image'
 
 export default ({ item }) => {
@@ -29,7 +29,7 @@ export default ({ item }) => {
             <div className="result-inner">
               <h6>{post_title}</h6>
             </div>
-            <div className="actions">
+            {/* <div className="actions">
               <span style={{
                 marginRight: 'auto',
               }}>
@@ -39,7 +39,7 @@ export default ({ item }) => {
                 <MdPageview onClick={launchDetailView} size="25" />
               </div>
               <CartButton slug={post_name} files={files} size="25" />
-            </div>
+            </div> */}
           </div>
         )
       }}
