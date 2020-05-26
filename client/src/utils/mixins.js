@@ -8,6 +8,9 @@ export default {
     return `
       display: grid;
       grid-template-columns: ${props.columns ? props.columns : '1fr 1fr'};
+      @media (max-width: 767px) {
+        display: block;
+      }
     `
   },
 }

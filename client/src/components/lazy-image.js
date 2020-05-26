@@ -7,7 +7,7 @@ const Preview = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${props => props.height ? props.height : 'auto'};
+  height: ${props => props.height ? props.height : '100%'};
   width: ${props => props.width ? props.width : '100%'};
   cursor: pointer;
   &:hover {

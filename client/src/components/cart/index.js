@@ -5,6 +5,7 @@ import qs from 'qs'
 import { MdClose } from 'react-icons/md'
 import { Animated } from 'react-animated-css'
 import Preview from '../lazy-image'
+import mixins from '../../utils/mixins'
 
 const wp_data = window.wp_data 
     ? window.wp_data
@@ -21,6 +22,15 @@ const Flex = styled.div`
   flex-wrap: wrap;
 `
 
+const Form = styled.form`
+  ${props => mixins.grid(props)}
+  input,
+  button {
+    width: 100%;
+    padding: 20px;
+  }
+`
+
 const Thumb = styled.div`
   position: relative;
   background: white;
@@ -30,21 +40,20 @@ const Thumb = styled.div`
 `
 
 const RemoveButton = styled.button`
-  background: 'blue';
+  background: #B80C09;
   border-radius: 100%;
   border: 1px solid red;
   padding: 10px;
   position: absolute;
   top: -15px;
   right: -15px;
+  transition: all .15s ease;
   svg {
-    fill: red;
+    fill: white;
   }
   &:hover {
-    background: red;
-  }
-  &:hover svg {
-    fill: blue;
+    background: #8A0806;
+    transform: scale(1.2);
   }
 `
 
@@ -81,29 +90,32 @@ export default ({ toZip, dispatch }) => {
       <h2>My Downloads</h2>
       <p>Enter your email so we can send you a download link!</p>
       {wp_data && admin_ajax_url ? (
-        <form onSubmit={handleSubmit} className="email-downloads-form">
-          <div>
-            <label htmlFor="email" className="sr-only">Email</label>
-            <input
-              onChange={e => setEmail(e.target.value)}
-              type="email"
-              name="email"
-              placeholder="cool_employee@thebestcompany.com" 
-              value={email}
-            />
-          </div>
+        <Form
+          columns="3fr 1fr 1fr" 
+          onSubmit={handleSubmit} 
+          className="email-downloads-form"
+        >
+          <label htmlFor="email" style={{display: 'none'}}>Email</label>
+          <input
+            name="email"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="cool_employee@thebestcompany.com" 
+          />
           <button
+            disabled={Object.entries(toZip).length === 0 || !email.includes('@')}
             type="submit"
-            disabled={!email.includes('@')}
-          >
-            {loading ? 'SENDING...' : 'SEND'}
-          </button>
+          >{loading ? 'SENDING...' : 'SEND'}</button>
           <button
-            onClick={() => dispatch({type: 'CLEAR_ZIP'})}
-            type="button"
+            onClick={() => {
+              dispatch({type: 'CLEAR_ZIP'})
+              setMessage(null)
+            }}
             style={{background: 'red', color: 'white'}}
+            type="button"
           >CLEAR ALL</button>
-        </form>  
+        </Form>  
       ) : (
         <p style={{color: 'red'}}>Error. No admin_ajax_url.</p>
       ) }
@@ -119,7 +131,6 @@ export default ({ toZip, dispatch }) => {
               {val.map(file => (
                 <Thumb className="thumb" key={file} backgroundImage={file}>
                   <RemoveButton
-                    className="remove-button"
                     onClick={() => dispatch({
                       type: 'TOGGLE_ZIP_ITEM',
                       payload: {
@@ -142,7 +153,7 @@ export default ({ toZip, dispatch }) => {
           </section>
         )
       }) : (
-        <p style={{marginTop: 50}}>Looks like you need to add some files to your download.</p>
+        <p style={{marginTop: 50}}>Uh oh! Looks like you need to add some files to your download.</p>
       )}
     </Animated>
   )

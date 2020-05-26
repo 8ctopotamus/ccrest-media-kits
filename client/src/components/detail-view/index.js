@@ -5,14 +5,9 @@ import File from './file'
 import CartButton from '../cart/toggle-button'
 import Grid from '../grid'
 
-
-import mixins from '../../utils/mixins'
-
-
 const Header = styled.div`
   display: flex;
-  `
-  // justify-content: space-between;
+`
 
 const ThumbGrid = styled.div`
   display: grid;
@@ -29,7 +24,7 @@ const Tag = styled.li`
   padding-left: 0;
 `
 
-export default ({state, dispatch}) => {
+export default ({ state }) => {
   const {
     post_name: slug,
     post_title,
