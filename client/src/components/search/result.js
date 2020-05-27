@@ -10,6 +10,7 @@ const Result = styled.div`
   height: 100%;
   box-shadow: 1px 1px 9px rgba(0,0,0,.15);
   cursor: pointer;
+  margin-bottom: 30px;
   h6 {
     margin: 0;
   }

@@ -3,12 +3,6 @@ import styled from 'styled-components'
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 
-  // width: 200px;
-  // height: 150px;
-
-// &:hover {
-//   opacity: .85;
-// }
 const LazyImage = styled.div`
   display: flex;
   justify-content: center;
@@ -18,20 +12,21 @@ const LazyImage = styled.div`
   display: inline-block;
   overflow: hidden;
   margin: 0;
-  height: ${props => props.height ? props.height : '100%'};
+  height: ${props => props.height ? props.height : 'auto'};
   width: ${props => props.width ? props.width : '100%'};
+  object-fit:contain;
   & > img {
     display: block;
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
     min-height: 100%;
     max-width: 100%;
-    transform: translate(-50%, -50%);
+    ${props => props.height && `max-height: ${props.height};`}
   }
 `
-  // height: ${props => props.height ? props.height : '100%'};
-  // width: ${props => props.width ? props.width : '100%'};
 
 export default ({ imageURL, onClick, height, width }) => {
   const [ready, setReady] = useState(false)

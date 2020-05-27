@@ -13,10 +13,9 @@ const File = styled.div`
   margin-bottom: 30px;
 `
 
+// height: 450px;
+// width: 100%;
 const PreviewContainer = styled.div`
-  max-height: 300px;
-  height: 450px;
-  width: 100%;
   cursor: pointer;
   &:hover {
     opacity: .9;
@@ -77,7 +76,11 @@ export default ({ slug, file }) => {
     <File className="file">
       <PreviewContainer >
         {!showDetails ? (
-          <LazyImage imageURL={image} onClick={() => setShowDetails(!showDetails)} />
+          <LazyImage
+            imageURL={image}
+            onClick={() => setShowDetails(!showDetails)}
+            height="450px"
+          />
         ) : (
           <Details onClick={() => setShowDetails(!showDetails)}>
             <h3>{title}</h3>
