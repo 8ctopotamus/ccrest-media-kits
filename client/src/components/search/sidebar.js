@@ -4,23 +4,20 @@ import { MdFilterList, MdClose, MdRestore } from 'react-icons/md'
 import AppContext from '../../context'
 
 const navWidth = '220px'
+const mediumBreakpoint = '860px'
 
 const Sidebar = styled.div`
   height: 100%;
   width: auto;
-  position: relative;
-`
-
-const SidebarInner = styled.div`
-  background: #44acdf;
-  color: white;
   position: absolute;
   top: 0;
   left: 0;
   width: ${navWidth};
+  background: #44acdf;
+  color: white;
   height: 100%;
   z-index: 100;
-  padding: 15px;
+  padding: 82px 15px;
   ul {
     list-style-type: none;
     margin-left: 0;
@@ -28,16 +25,22 @@ const SidebarInner = styled.div`
   input[type="checkbox"] {
     margin: 0 10px 0 0;
   }
-  @media (max-width: 860px) {
-    transform: translateX(-${navWidth});
+  @media (max-width: ${mediumBreakpoint}) {
+    display: ${props => props.open ? 'block' : 'none'};
   }
 `
 
 const SidebarToggle = styled.div`
+  display: none;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 100;
+  top: 22px;
+  left: 30px;
+  z-index: 1000;
+  cursor: pointer;
+  svg { fill: white; }
+  @media (max-width: ${mediumBreakpoint}) {
+    display: block;
+  }
 `
 
 const Controls = ({ cats }) => (
@@ -93,12 +96,10 @@ const Controls = ({ cats }) => (
 
 export default ({ cats }) => {
   const [open, setOpen] = useState(false)
-
   const toggleOpen = () => setOpen(!open)
-  
   return (
-    <div className={`${open ? 'open' : ''}`}> 
-      <SidebarToggle className="sidebar-toggle hidden-lg">
+    <>
+      <SidebarToggle>
         <div onClick={toggleOpen}>
           { open 
             ? <MdClose size="30" />
@@ -106,9 +107,9 @@ export default ({ cats }) => {
           }
         </div>
       </SidebarToggle>
-      <SidebarInner className="animated slideInLeft">
+      <Sidebar open={open} className="animated slideInLeft">
         <Controls cats={cats} />
-      </SidebarInner>
-    </div>
+      </Sidebar>
+    </>
   )
 }

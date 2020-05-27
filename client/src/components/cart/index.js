@@ -156,7 +156,7 @@ export default ({ toZip, dispatch }) => {
           </section>
         )
       }) : (
-        <p style={{marginTop: 50}}>Uh oh! Looks like you need to add some files to your download.</p>
+        <h4 style={{marginTop: 50}}>Hang on! Looks like you need to add some files to download.</h4>
       )}
     </Animated>
   )

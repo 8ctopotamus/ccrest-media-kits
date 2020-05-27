@@ -15,8 +15,9 @@ const File = styled.div`
 
 const PreviewContainer = styled.div`
   max-height: 300px;
-  height: 400px;
+  height: 450px;
   width: 100%;
+  cursor: pointer;
   &:hover {
     opacity: .9;
   }
