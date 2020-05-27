@@ -15,6 +15,7 @@ const File = styled.div`
 
 const PreviewContainer = styled.div`
   max-height: 300px;
+  height: 400px;
   width: 100%;
   &:hover {
     opacity: .9;
@@ -49,7 +50,7 @@ const HoverIcon = styled.a`
   margin: 30px;
   text-decoration: none;
   &:hover {
-    background: #3d9ac8;
+    background: lightgray;
     color: white;
   }
 `

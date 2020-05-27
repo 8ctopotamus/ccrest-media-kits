@@ -3,13 +3,21 @@ import styled from 'styled-components'
 import { MdFilterList, MdClose, MdRestore } from 'react-icons/md'
 import AppContext from '../../context'
 
+const navWidth = '220px'
+
 const Sidebar = styled.div`
+  height: 100%;
+  width: auto;
+  position: relative;
+`
+
+const SidebarInner = styled.div`
   background: #44acdf;
   color: white;
   position: absolute;
   top: 0;
   left: 0;
-  width: 220px;
+  width: ${navWidth};
   height: 100%;
   z-index: 100;
   padding: 15px;
@@ -20,6 +28,16 @@ const Sidebar = styled.div`
   input[type="checkbox"] {
     margin: 0 10px 0 0;
   }
+  @media (max-width: 860px) {
+    transform: translateX(-${navWidth});
+  }
+`
+
+const SidebarToggle = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
 `
 
 const Controls = ({ cats }) => (
@@ -80,17 +98,17 @@ export default ({ cats }) => {
   
   return (
     <div className={`${open ? 'open' : ''}`}> 
-      <div className="sidebar-toggle hidden-lg">
+      <SidebarToggle className="sidebar-toggle hidden-lg">
         <div onClick={toggleOpen}>
           { open 
             ? <MdClose size="30" />
             : <MdFilterList size="30" />
           }
         </div>
-      </div>
-      <Sidebar className="sidebar animated slideInLeft">
+      </SidebarToggle>
+      <SidebarInner className="animated slideInLeft">
         <Controls cats={cats} />
-      </Sidebar>
+      </SidebarInner>
     </div>
   )
 }

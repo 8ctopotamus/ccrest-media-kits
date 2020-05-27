@@ -1,11 +1,18 @@
 import React from 'react'
+import styled from 'styled-components'
 import AppContext from './context'
 import AppProvider from './context/provider'
 import Nav from './components/nav'
 import Cart from './components/cart'
 import Search from './components/search'
 
-const App = () => {
+const App = styled.div`
+  background: #eee;
+  overflow: hidden;
+  position: relative;
+`
+
+export default () => {
   const wp_data = window.wp_data 
     ? window.wp_data
     : null
@@ -14,8 +21,8 @@ const App = () => {
   } else {
     const { assets, categories } = wp_data.data
     return (
-      <AppProvider>
-        <div id="app">
+      <App id="app">
+        <AppProvider>
           <Nav />
           <AppContext.Consumer>
             {({state, dispatch}) => (
@@ -29,10 +36,8 @@ const App = () => {
                   />
             )}
           </AppContext.Consumer>
-        </div>
       </AppProvider>
+    </App>
     )
   }
 }
-
-export default App

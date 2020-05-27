@@ -7,6 +7,7 @@ import Grid from '../grid'
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const ThumbGrid = styled.div`
@@ -15,6 +16,21 @@ const ThumbGrid = styled.div`
   grid-gap: 15px;
   @media (max-width: 767px) {
     display: block;
+  }
+`
+
+const TagCloud = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin-left: 0;
+  & > * {
+    margin: 10px 10px 10px 0;
+  }
+  li {
+    background: limegreen;
+    border-radius: 50px;
+    padding: 5px 20px;
   }
 `
 
@@ -40,7 +56,7 @@ export default ({ state }) => {
       className="container"
     >
       <Header>
-        <h1>{post_title}</h1>
+        <h2>{post_title}</h2>
         <CartButton 
           text="Add all"
           alternativeText="Remove all"
@@ -77,11 +93,11 @@ export default ({ state }) => {
         <div>
           <h4>Tags</h4>
           {tags.length > 0 ? (
-            <ul className="tag-cloud">
+            <TagCloud>
               {tags.map(tag => (
                 <li key={tag}>{tag}</li>
               ))}
-            </ul>
+            </TagCloud>
           ) : <em>This kit is not categorized</em>}
         </div>
       </Grid>

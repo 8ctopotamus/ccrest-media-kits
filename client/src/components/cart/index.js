@@ -42,12 +42,14 @@ const Thumb = styled.div`
 const RemoveButton = styled.button`
   background: #B80C09;
   border-radius: 100%;
-  border: 1px solid red;
+  border: 1px solid #8A0806;
   padding: 10px;
   position: absolute;
   top: -15px;
   right: -15px;
   transition: all .15s ease;
+  cursor: pointer;
+  z-index: 10;
   svg {
     fill: white;
   }
@@ -112,7 +114,7 @@ export default ({ toZip, dispatch }) => {
               dispatch({type: 'CLEAR_ZIP'})
               setMessage(null)
             }}
-            style={{background: 'red', color: 'white'}}
+            style={{background: '#B80C09', color: 'white'}}
             type="button"
           >CLEAR ALL</button>
         </Form>  
@@ -131,6 +133,7 @@ export default ({ toZip, dispatch }) => {
               {val.map(file => (
                 <Thumb className="thumb" key={file} backgroundImage={file}>
                   <RemoveButton
+                    className="remove"
                     onClick={() => dispatch({
                       type: 'TOGGLE_ZIP_ITEM',
                       payload: {
